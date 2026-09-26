@@ -1,0 +1,133 @@
+<div class="analytics-consent" data-analytics-consent hidden>
+  <div class="consent-copy">
+    <strong>Optional analytics</strong>
+    <p>
+      PairPilotFX uses privacy-conscious analytics to understand which pages, tools, and acquisition paths are useful.
+      No advertising or remarketing is used.
+    </p>
+  </div>
+  <div class="consent-actions">
+    <button class="button" type="button" data-analytics-accept>Allow analytics</button>
+    <button class="button button-secondary" type="button" data-analytics-decline>Essential only</button>
+    <a href="/privacy/">Privacy details</a>
+  </div>
+</div>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-analytics-consent]');
+  const accept = root?.querySelector<HTMLButtonElement>('[data-analytics-accept]');
+  const decline = root?.querySelector<HTMLButtonElement>('[data-analytics-decline]');
+
+  function api() {
+    return (window as Window & {
+      pairpilotfxAnalytics?: {
+        getConsent?: () => 'granted' | 'denied' | 'unknown';
+        setConsent?: (value: 'granted' | 'denied') => void;
+        externalCollectionConfigured?: () => boolean;
+      }
+    }).pairpilotfxAnalytics;
+  }
+
+  function show(): void {
+    if (!root) return;
+    const analytics = api();
+    root.hidden = !(analytics?.externalCollectionConfigured?.() ?? false);
+  }
+
+  function hide(): void {
+    if (root) root.hidden = true;
+  }
+
+  function initialize(): void {
+    const analytics = api();
+    if (!analytics?.externalCollectionConfigured?.()) {
+      hide();
+      return;
+    }
+
+    if ((analytics.getConsent?.() ?? 'unknown') === 'unknown') {
+      show();
+    }
+  }
+
+  accept?.addEventListener('click', () => {
+    api()?.setConsent?.('granted');
+    hide();
+  });
+
+  decline?.addEventListener('click', () => {
+    api()?.setConsent?.('denied');
+    hide();
+  });
+
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    if (target.closest('[data-analytics-consent-settings]')) {
+      event.preventDefault();
+      show();
+    }
+  });
+
+  window.addEventListener('load', initialize, { once: true });
+</script>
+
+<style>
+  .analytics-consent {
+    position: fixed;
+    z-index: 1000;
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 18px 20px;
+    border: 1px solid var(--border-strong);
+    border-radius: 16px;
+    background: rgba(5, 16, 29, .98);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .38);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .analytics-consent[hidden] { display: none; }
+
+  .consent-copy { display: grid; gap: 6px; }
+  .consent-copy strong { color: #eef7ff; }
+  .consent-copy p {
+    margin: 0;
+    color: var(--muted);
+    font-size: .84rem;
+    line-height: 1.55;
+  }
+
+  .consent-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .consent-actions .button {
+    border: 0;
+    cursor: pointer;
+    padding: 10px 14px;
+    font-size: .82rem;
+  }
+
+  .consent-actions a {
+    color: #9fcfff;
+    font-size: .78rem;
+    text-decoration: none;
+  }
+
+  .consent-actions a:hover { text-decoration: underline; }
+
+  @media (max-width: 760px) {
+    .analytics-consent { grid-template-columns: 1fr; }
+    .consent-actions { justify-content: flex-start; }
+  }
+</style>
