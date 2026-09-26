@@ -24,10 +24,12 @@ The private PairPilotFX automation/Radar backend remains a separate system and i
 - `/tools/` — free trader tools landing page
 - `/tools/trade-preparation-checklist/` — interactive PairPilot Trade Preparation Checklist
 - `/radar/` — PairPilot Radar product page
+- `/early-access/` — Radar early-access waitlist
+- `/early-access/thanks/` — non-JavaScript waitlist confirmation fallback
 - `/privacy/` — Privacy Policy
 - `/terms/` — Terms of Service
 
-Phase 6B routes site-level Weekly Brief CTAs through `/weekly/` before the final Substack subscription handoff. Phase 6C adds the first free trader tool. Phase 6D adds the dedicated Radar product surface. Early-access work belongs to a later Phase 6 increment.
+Phase 6B routes site-level Weekly Brief CTAs through `/weekly/` before the final Substack subscription handoff. Phase 6C adds the first free trader tool. Phase 6D adds the dedicated Radar product surface. Phase 6G adds the Radar early-access waitlist while keeping the private automation backend isolated.
 
 ## Analytics foundation
 
@@ -76,9 +78,22 @@ The public Radar product surface is implemented.
 - the product model follows Context → Strength → Structure → Liquidity → Confirmation → Risk;
 - public messaging makes the distinction between attention, location, missing confirmation, and invalidation explicit;
 - product boundaries clearly state that Radar is not a BUY/SELL signal service, guaranteed-outcome product, or autonomous execution system;
-- the page states that public Radar access is not yet open and that early-access enrollment will be introduced separately;
+- the page states that public Radar access is not yet open and routes interested traders into the dedicated early-access waitlist;
 - homepage, methodology, header, and footer Radar links now route to the owned `/radar/` product page;
 - Radar entry clicks continue to use the `radar_cta_click` analytics event, while follow-on Weekly Brief and free-tool CTAs use their existing funnel events.
+
+## Phase 6G — Radar early-access waitlist
+
+The early-access acquisition layer is implemented.
+
+- `/early-access/` provides a real Radar interest form rather than a placeholder CTA;
+- email is required, while first name, trading experience, watched markets, scanning problem, and desired help are optional;
+- waitlist submissions are handled through a separate public form-processing boundary and are not routed through the private PairPilotFX automation/Radar backend;
+- FormSubmit is the current default transport, with `PUBLIC_WAITLIST_ENDPOINT` available as a build-time override for a future provider;
+- website analytics never include waitlist email addresses, names, pair selections, or free-text answers;
+- measurable waitlist events are `early_access_cta_click`, `early_access_view`, `early_access_signup`, and `early_access_submit_error`;
+- the Radar product page now routes interested visitors into the waitlist;
+- joining the waitlist does not guarantee access; the list is intended to help select a small Phase 7 private-alpha tester group.
 
 ## Local development
 
