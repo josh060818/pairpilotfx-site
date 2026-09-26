@@ -28,20 +28,33 @@ import Framework from '../components/Framework.astro';
         <p class="hero-note">Scenario-based research. No signals. No guaranteed outcomes.</p>
       </div>
 
-      <div class="terminal card" aria-label="Illustration of the PairPilotFX filtering process">
-        <div class="terminal-bar">
-          <span>PAIRPILOT / MARKET FILTER</span>
-          <span class="live">FRAMEWORK</span>
+      <div class="hero-visual">
+        <div class="brand-banner card">
+          <img
+            src="/brand/pairpilotfx-banner.png"
+            width="820"
+            height="312"
+            alt="PairPilot FX — Guiding Better Trading Decisions"
+            loading="eager"
+            decoding="async"
+          />
         </div>
-        <div class="scan-row"><span>01</span><strong>CONTEXT</strong><em>macro mapped</em></div>
-        <div class="scan-row"><span>02</span><strong>STRENGTH</strong><em>relative edge</em></div>
-        <div class="scan-row"><span>03</span><strong>STRUCTURE</strong><em>D1 / H4 / H1</em></div>
-        <div class="scan-row"><span>04</span><strong>LIQUIDITY</strong><em>decision area</em></div>
-        <div class="scan-row"><span>05</span><strong>CONFIRMATION</strong><em>condition required</em></div>
-        <div class="scan-row"><span>06</span><strong>RISK</strong><em>invalidation defined</em></div>
-        <div class="terminal-result">
-          <span>PROCESS</span>
-          <strong>FILTER → FOCUS → PREPARE</strong>
+
+        <div class="terminal card" aria-label="Illustration of the PairPilotFX filtering process">
+          <div class="terminal-bar">
+            <span>PAIRPILOT / MARKET FILTER</span>
+            <span class="live">FRAMEWORK</span>
+          </div>
+          <div class="scan-row"><span>01</span><strong>CONTEXT</strong><em>macro mapped</em></div>
+          <div class="scan-row"><span>02</span><strong>STRENGTH</strong><em>relative edge</em></div>
+          <div class="scan-row"><span>03</span><strong>STRUCTURE</strong><em>D1 / H4 / H1</em></div>
+          <div class="scan-row"><span>04</span><strong>LIQUIDITY</strong><em>decision area</em></div>
+          <div class="scan-row"><span>05</span><strong>CONFIRMATION</strong><em>condition required</em></div>
+          <div class="scan-row"><span>06</span><strong>RISK</strong><em>invalidation defined</em></div>
+          <div class="terminal-result">
+            <span>PROCESS</span>
+            <strong>FILTER → FOCUS → PREPARE</strong>
+          </div>
         </div>
       </div>
     </div>
@@ -148,6 +161,9 @@ import Framework from '../components/Framework.astro';
     width: 7px; height: 7px; border-radius: 50%; background: var(--success);
     box-shadow: 0 0 0 5px rgba(101,211,162,.08);
   }
+  .hero-visual { display: grid; gap: 16px; }
+  .brand-banner { overflow: hidden; background: #fff; box-shadow: var(--shadow); }
+  .brand-banner img { width: 100%; height: auto; }
   .terminal { overflow: hidden; box-shadow: var(--shadow); }
   .terminal-bar {
     display: flex; justify-content: space-between; gap: 16px;
