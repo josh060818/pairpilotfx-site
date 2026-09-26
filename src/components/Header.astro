@@ -11,7 +11,14 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
     <nav class="nav-links" aria-label="Primary navigation">
       <a class:list={[{ active: isActive('/') }]} href="/">Home</a>
       <a class:list={[{ active: isActive('/about/') }]} href="/about/">Methodology</a>
-      <a href="https://pairpilotfx.substack.com/subscribe" rel="noopener noreferrer">Weekly Brief</a>
+      <a
+        href="https://pairpilotfx.substack.com/subscribe"
+        rel="noopener noreferrer"
+        data-analytics-event="weekly_brief_cta_click"
+        data-analytics-placement="header"
+        data-analytics-outbound="substack"
+        data-utm-campaign="weekly_brief"
+      >Weekly Brief</a>
     </nav>
   </div>
 </header>

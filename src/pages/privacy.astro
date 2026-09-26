@@ -9,7 +9,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
   <article class="policy">
     <p class="eyebrow">PairPilotFX</p>
     <h1>Privacy Policy</h1>
-    <p><strong>Last updated:</strong> September 23, 2026</p>
+    <p><strong>Last updated:</strong> September 25, 2026</p>
 
     <p>
       This Privacy Policy explains how PairPilotFX handles information in connection with its website,
@@ -69,7 +69,10 @@ import SiteLayout from '../layouts/SiteLayout.astro';
     <p>
       OAuth credentials are retained while the YouTube integration remains connected and operational.
       Operational logs and publishing records may be retained as needed for reliability, auditability,
-      troubleshooting, and security. We aim to avoid storing unnecessary Google user data.
+      troubleshooting, and security. Website attribution held in browser session storage is scoped to the
+      active browser session. If analytics events are collected by a configured reporting endpoint, they
+      may be retained as needed for aggregate product and funnel analysis. We aim to avoid storing unnecessary
+      Google user data or unnecessary website visitor data.
     </p>
 
     <h2>6. Revoking Google access</h2>
@@ -84,11 +87,26 @@ import SiteLayout from '../layouts/SiteLayout.astro';
       to request disconnection or deletion of OAuth credentials held by PairPilotFX.
     </p>
 
-    <h2>7. Website data</h2>
+    <h2>7. Website analytics and technical data</h2>
     <p>
-      This website is intended primarily as an informational site. If hosting or security providers
-      process basic technical information such as IP addresses, request timestamps, browser information,
-      or server logs, that information may be processed for delivery, abuse prevention, and security.
+      PairPilotFX uses first-party website instrumentation to understand page usage, campaign attribution,
+      and interactions with links such as Weekly Brief, Substack, methodology, and Radar calls to action.
+      The site may store an anonymous browser-session identifier and UTM campaign parameters in
+      <code>sessionStorage</code> for the active browser session. This instrumentation does not use
+      advertising cookies or create a persistent advertising profile.
+    </p>
+    <p>
+      Analytics events are designed to contain only information needed for aggregate funnel measurement,
+      such as the page path and title, referring hostname, UTM campaign fields, anonymous session identifier,
+      event name, CTA placement, and destination. PairPilotFX does not intentionally include names, email
+      addresses, form contents, passwords, or full referring URLs in this event payload.
+    </p>
+    <p>
+      When an analytics collection endpoint is configured, these events may be transmitted to
+      PairPilotFX-controlled or contracted infrastructure for aggregate reporting. Hosting, network,
+      security, or analytics infrastructure may also process technical information such as IP addresses,
+      request timestamps, browser information, or server logs as necessary to deliver and protect the service.
+      PairPilotFX does not use this website analytics instrumentation for personalized advertising.
     </p>
 
     <h2>8. Children</h2>

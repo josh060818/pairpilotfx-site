@@ -67,5 +67,9 @@ const pageTitle = title === 'PairPilotFX'
       <slot />
     </main>
     <Footer />
+    <script>
+      import { initAnalytics } from '../scripts/analytics';
+      initAnalytics();
+    </script>
   </body>
 </html>
