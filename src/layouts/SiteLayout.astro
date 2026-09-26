@@ -32,7 +32,7 @@ const pageTitle = title === 'PairPilotFX'
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href="/brand/pairpilotfx-compass.png" type="image/png" />
+    <link rel="icon" href="/brand/pairpilotfx-compass.png" type="image/png" sizes="any" />
     <link rel="apple-touch-icon" href="/brand/pairpilotfx-compass.png" />
     {noindex && <meta name="robots" content="noindex,nofollow" />}
 
@@ -42,6 +42,7 @@ const pageTitle = title === 'PairPilotFX'
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content="https://pairpilotfx.com/brand/pairpilotfx-banner.png" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="820" />
     <meta property="og:image:height" content="312" />
     <meta property="og:image:alt" content="PairPilot FX — Guiding Better Trading Decisions" />
