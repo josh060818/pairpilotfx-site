@@ -57,12 +57,12 @@ Every browser event follows contract version `1.0`:
 ```json
 {
   "contract_version": "1.0",
-  "event_name": "weekly_brief_cta_click",
+  "event_name": "weekly_brief_subscribe_click",
   "occurred_at": "ISO-8601 timestamp",
   "session_id": "anonymous session id",
   "page": {
-    "path": "/",
-    "title": "PairPilotFX — Guiding Better Trading Decisions",
+    "path": "/weekly/",
+    "title": "Weekly FX Brief — PairPilotFX",
     "referrer_host": "example.com"
   },
   "attribution": {
@@ -80,7 +80,7 @@ Every browser event follows contract version `1.0`:
     }
   },
   "properties": {
-    "placement": "hero",
+    "placement": "weekly_hero",
     "destination": "pairpilotfx.substack.com/subscribe"
   }
 }
@@ -95,7 +95,9 @@ Implemented now:
 | Event | Trigger |
 | --- | --- |
 | `page_view` | each page load |
-| `weekly_brief_cta_click` | Weekly Brief subscription CTA |
+| `weekly_brief_cta_click` | CTA that routes a visitor to the dedicated Weekly Brief acquisition page |
+| `weekly_brief_subscribe_click` | outbound subscription CTA from the Weekly Brief page to Substack |
+| `weekly_brief_learn_more_click` | Weekly Brief page jump to the content/benefits section |
 | `substack_click` | general research/Substack link |
 | `radar_cta_click` | Radar methodology/product-interest link |
 | `methodology_cta_click` | homepage methodology CTA |
