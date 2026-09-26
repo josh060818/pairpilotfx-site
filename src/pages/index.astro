@@ -140,6 +140,23 @@ import Framework from '../components/Framework.astro';
           >Understand the approach →</a>
         </article>
       </div>
+
+      <div class="free-tool-promo card">
+        <div>
+          <span class="card-index">FREE TOOL / AVAILABLE NOW</span>
+          <h3>PairPilot Trade Preparation Checklist</h3>
+          <p>
+            Work through Context, Strength, Structure, Liquidity, Confirmation, and Risk before treating
+            a scenario as fully prepared. Your answers stay saved locally on your device.
+          </p>
+        </div>
+        <a
+          class="button"
+          href="/tools/trade-preparation-checklist/"
+          data-analytics-event="free_tool_cta_click"
+          data-analytics-placement="homepage_tool_promo"
+        >Open the free checklist →</a>
+      </div>
     </div>
   </section>
 
@@ -237,6 +254,19 @@ import Framework from '../components/Framework.astro';
   .product-grid p { color: var(--muted); }
   .product-grid a { margin-top: auto; color: var(--accent-strong); text-decoration: none; font-weight: 750; font-size: .9rem; }
   .card-index { color: #668199; font-size: .68rem; font-weight: 850; letter-spacing: .13em; }
+  .free-tool-promo {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: center;
+    margin-top: 20px;
+    padding: clamp(24px, 4vw, 38px);
+    border-color: var(--border-strong);
+    background: linear-gradient(135deg, rgba(88,166,255,.08), rgba(255,255,255,.02));
+  }
+  .free-tool-promo > div { display: grid; gap: 12px; }
+  .free-tool-promo p { color: var(--muted); max-width: 760px; }
+  .free-tool-promo .button { white-space: nowrap; }
   .cta {
     display: grid;
     grid-template-columns: 1.15fr .85fr;
@@ -261,7 +291,7 @@ import Framework from '../components/Framework.astro';
     .hero-grid { grid-template-columns: 1fr; }
     .terminal { max-width: 650px; }
     .trust-grid { grid-template-columns: repeat(2,1fr); }
-    .section-heading, .cta { grid-template-columns: 1fr; }
+    .section-heading, .cta, .free-tool-promo { grid-template-columns: 1fr; }
     .section-heading .muted { justify-self: start; }
   }
   @media (max-width: 520px) {

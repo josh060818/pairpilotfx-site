@@ -17,6 +17,12 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
         data-analytics-event="weekly_brief_cta_click"
         data-analytics-placement="header"
       >Weekly Brief</a>
+      <a
+        class:list={[{ active: isActive('/tools/') }]}
+        href="/tools/"
+        data-analytics-event="free_tool_cta_click"
+        data-analytics-placement="header"
+      >Tools</a>
     </nav>
   </div>
 </header>
