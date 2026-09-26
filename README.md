@@ -23,7 +23,22 @@ The private PairPilotFX automation/Radar backend remains a separate system and i
 - `/privacy/` — Privacy Policy
 - `/terms/` — Terms of Service
 
-The Weekly Brief currently routes directly to the existing PairPilotFX Substack. Dedicated `/weekly/`, free-tool, Radar product, analytics, and early-access work belong to later Phase 6 increments.
+The Weekly Brief currently routes directly to the existing PairPilotFX Substack. Dedicated `/weekly/`, free-tool, Radar product, and early-access work belong to later Phase 6 increments.
+
+## Analytics foundation
+
+The Phase 6 analytics foundation is implemented.
+
+- inbound UTM attribution is captured for the active browser session;
+- first-touch and current-touch campaign values are preserved in `sessionStorage`;
+- page views and acquisition CTA clicks follow a versioned event contract;
+- tracked Substack links preserve inbound attribution and add on-site CTA placement;
+- events are pushed to `window.dataLayer` and emitted as `pairpilotfx:analytics` browser events;
+- an optional `PUBLIC_ANALYTICS_ENDPOINT` can receive the same event envelope without changing site instrumentation.
+
+The full UTM/event contract is documented in [docs/analytics.md](docs/analytics.md).
+
+No analytics vendor is hard-coded into the public site. This keeps the foundation portable while the later Phase 6 reporting increment selects the collector/storage layer.
 
 ## Local development
 
