@@ -12,12 +12,10 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
       <a class:list={[{ active: isActive('/') }]} href="/">Home</a>
       <a class:list={[{ active: isActive('/about/') }]} href="/about/">Methodology</a>
       <a
-        href="https://pairpilotfx.substack.com/subscribe"
-        rel="noopener noreferrer"
+        class:list={[{ active: isActive('/weekly/') }]}
+        href="/weekly/"
         data-analytics-event="weekly_brief_cta_click"
         data-analytics-placement="header"
-        data-analytics-outbound="substack"
-        data-utm-campaign="weekly_brief"
       >Weekly Brief</a>
     </nav>
   </div>
