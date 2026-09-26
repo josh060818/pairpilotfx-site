@@ -91,6 +91,10 @@ The site intentionally records the page path rather than the full page URL and r
 For the Trade Preparation Checklist, analytics events do not include the visitor's instrument/scenario label,
 preparation notes, or individual checklist answers. Those values are used only for the browser-local tool state.
 
+For Radar early access, analytics events do not include email address, first name, pair selections, or free-text
+waitlist answers. The successful `early_access_signup` event records only coarse interaction metadata such as
+experience bucket, number of selected markets, and whether optional problem/help fields were provided.
+
 ## Event names
 
 Implemented now:
@@ -108,13 +112,17 @@ Implemented now:
 | `tool_open` | Trade Preparation Checklist loaded in the browser |
 | `tool_complete` | all checklist conditions transition to Confirmed during the active visit |
 | `tool_reset` | visitor resets the locally saved checklist |
+| `early_access_cta_click` | CTA that routes a visitor to the Radar early-access waitlist |
+| `early_access_view` | Radar early-access waitlist page loaded |
+| `early_access_signup` | waitlist provider accepted a Radar early-access submission |
+| `early_access_submit_error` | waitlist submission failed before provider acceptance |
 
 Reserved for later Phase 6 increments:
 
 | Event | Intended use |
 | --- | --- |
-| `early_access_cta_click` | Radar early-access CTA |
-| `waitlist_signup` | successful waitlist conversion |
+| `waitlist_invite_sent` | selected tester invitation is sent in the future |
+| `waitlist_invite_accepted` | selected tester accepts a future private-alpha invitation |
 
 ## Delivery
 
