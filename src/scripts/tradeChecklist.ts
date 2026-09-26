@@ -63,11 +63,11 @@ function initTradeChecklist(): void {
   const instrument = root.querySelector<HTMLInputElement>('[data-tool-instrument]');
   const planContext = root.querySelector<HTMLTextAreaElement>('[data-tool-context]');
   const resetButton = root.querySelector<HTMLButtonElement>('[data-tool-reset]');
-  const statusLabel = root.querySelector<HTMLElement>('[data-tool-status]');
-  const statusDetail = root.querySelector<HTMLElement>('[data-tool-status-detail]');
-  const reviewedLabel = root.querySelector<HTMLElement>('[data-tool-reviewed]');
-  const progress = root.querySelector<HTMLProgressElement>('[data-tool-progress]');
-  const saveState = root.querySelector<HTMLElement>('[data-tool-save-state]');
+  const statusLabel = document.querySelector<HTMLElement>('[data-tool-status]');
+  const statusDetail = document.querySelector<HTMLElement>('[data-tool-status-detail]');
+  const reviewedLabel = document.querySelector<HTMLElement>('[data-tool-reviewed]');
+  const progress = document.querySelector<HTMLProgressElement>('[data-tool-progress]');
+  const saveState = document.querySelector<HTMLElement>('[data-tool-save-state]');
   const groups = Array.from(root.querySelectorAll<HTMLElement>('[data-check-group]'));
 
   if (!instrument || !planContext || !resetButton || !statusLabel || !statusDetail || !reviewedLabel || !progress) {
@@ -85,6 +85,7 @@ function initTradeChecklist(): void {
   if (saved) {
     instrument.value = saved.instrument ?? '';
     planContext.value = saved.planContext ?? '';
+    if (saveState) saveState.textContent = 'Saved on this device';
 
     for (const [name, value] of Object.entries(saved.responses ?? {})) {
       const input = root.querySelector<HTMLInputElement>(
