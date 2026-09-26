@@ -21,10 +21,12 @@ The private PairPilotFX automation/Radar backend remains a separate system and i
 - `/` — public homepage
 - `/about/` — PairPilot methodology and Radar overview
 - `/weekly/` — Weekly FX Brief acquisition page
+- `/tools/` — free trader tools landing page
+- `/tools/trade-preparation-checklist/` — interactive PairPilot Trade Preparation Checklist
 - `/privacy/` — Privacy Policy
 - `/terms/` — Terms of Service
 
-Phase 6B routes site-level Weekly Brief CTAs through `/weekly/` before the final Substack subscription handoff. Free-tool, dedicated Radar product, and early-access work belong to later Phase 6 increments.
+Phase 6B routes site-level Weekly Brief CTAs through `/weekly/` before the final Substack subscription handoff. Phase 6C adds the first free trader tool. Dedicated Radar product and early-access work belong to later Phase 6 increments.
 
 ## Analytics foundation
 
@@ -50,6 +52,19 @@ The Weekly Brief acquisition layer is implemented.
 - final subscription CTAs hand off to the PairPilotFX Substack with preserved campaign attribution;
 - the analytics contract separates landing-page interest from outbound subscription intent through `weekly_brief_cta_click` and `weekly_brief_subscribe_click`;
 - the existing Substack publication remains the subscription and delivery platform.
+
+## Phase 6C — First free trader tool
+
+The PairPilot Trade Preparation Checklist is implemented.
+
+- `/tools/` establishes a public tools surface that can grow without exposing the private Radar backend;
+- `/tools/trade-preparation-checklist/` implements the Context → Strength → Structure → Liquidity → Confirmation → Risk process;
+- each preparation item can be marked `Confirmed` or `Waiting`, with an explanation of why it matters;
+- the neutral summary states are `Incomplete`, `Waiting`, and `Complete`;
+- `Complete` explicitly means the checklist review is complete, not that PairPilotFX recommends BUY or SELL;
+- instrument/scenario labels, optional notes, and checklist answers are persisted in browser `localStorage` and are not included in analytics;
+- tool acquisition and usage are measurable through `free_tool_cta_click`, `tool_open`, `tool_complete`, and `tool_reset`;
+- the tool links naturally back to the Weekly FX Brief as the next owned-audience step.
 
 ## Local development
 
