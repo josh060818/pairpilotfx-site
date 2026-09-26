@@ -32,7 +32,8 @@ const pageTitle = title === 'PairPilotFX'
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/brand/pairpilotfx-compass.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/brand/pairpilotfx-compass.png" />
     {noindex && <meta name="robots" content="noindex,nofollow" />}
 
     <meta property="og:type" content="website" />
@@ -40,9 +41,15 @@ const pageTitle = title === 'PairPilotFX'
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content="https://pairpilotfx.com/brand/pairpilotfx-banner.png" />
+    <meta property="og:image:width" content="820" />
+    <meta property="og:image:height" content="312" />
+    <meta property="og:image:alt" content="PairPilot FX — Guiding Better Trading Decisions" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://pairpilotfx.com/brand/pairpilotfx-banner.png" />
+    <meta name="twitter:image:alt" content="PairPilot FX — Guiding Better Trading Decisions" />
 
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
