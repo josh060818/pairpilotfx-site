@@ -1,0 +1,352 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+const groups = [
+  {
+    key: 'context_market',
+    pillar: 'Context',
+    number: '01',
+    question: 'The broader market environment is mapped.',
+    explanation: 'Know the macro and risk backdrop before interpreting a chart pattern. Context helps prevent a local setup from being treated as if it exists in isolation.'
+  },
+  {
+    key: 'context_events',
+    pillar: 'Context',
+    number: '02',
+    question: 'Relevant scheduled event risk is known.',
+    explanation: 'Major data, central-bank events, or other scheduled catalysts can change volatility and invalidate otherwise clean technical conditions.'
+  },
+  {
+    key: 'strength_relative',
+    pillar: 'Strength',
+    number: '03',
+    question: 'There is a clear relative-strength reason to prioritize this pair.',
+    explanation: 'The pair should earn attention through useful currency separation rather than being selected only because its chart looks active.'
+  },
+  {
+    key: 'strength_conflict',
+    pillar: 'Strength',
+    number: '04',
+    question: 'Conflicting strength evidence has been acknowledged.',
+    explanation: 'Mixed or converging strength can reduce clarity. If the relative-strength case is not clean, waiting is a valid outcome.'
+  },
+  {
+    key: 'structure_htf',
+    pillar: 'Structure',
+    number: '05',
+    question: 'D1 / H4 structure is clear enough to define the scenario.',
+    explanation: 'Higher-timeframe structure should provide the directional and contextual framework before lower-timeframe execution is considered.'
+  },
+  {
+    key: 'structure_h1',
+    pillar: 'Structure',
+    number: '06',
+    question: 'H1 structure supports the planned decision area.',
+    explanation: 'The execution timeframe should fit the higher-timeframe story rather than contradict it.'
+  },
+  {
+    key: 'liquidity_area',
+    pillar: 'Liquidity',
+    number: '07',
+    question: 'The key decision area is identified before entry.',
+    explanation: 'A scenario should have a defined location where price matters. Chasing away from a meaningful area weakens the preparation process.'
+  },
+  {
+    key: 'liquidity_map',
+    pillar: 'Liquidity',
+    number: '08',
+    question: 'Nearby liquidity or obvious swing targets are mapped.',
+    explanation: 'Knowing where price may seek liquidity helps frame both potential reactions and the risk of entering directly into a nearby target.'
+  },
+  {
+    key: 'confirmation_trigger',
+    pillar: 'Confirmation',
+    number: '09',
+    question: 'The confirmation condition is defined in advance.',
+    explanation: 'A scenario is not an entry. Define the displacement, rejection, break, retest, or other evidence that must appear before acting.'
+  },
+  {
+    key: 'confirmation_present',
+    pillar: 'Confirmation',
+    number: '10',
+    question: 'The required confirmation is actually present.',
+    explanation: 'If the condition has not occurred, the correct checklist state is Waiting. The tool is designed to make that decision explicit.'
+  },
+  {
+    key: 'risk_invalidation',
+    pillar: 'Risk',
+    number: '11',
+    question: 'Invalidation is objectively defined.',
+    explanation: 'Know what price behavior proves the scenario wrong before deciding whether the opportunity is worth taking.'
+  },
+  {
+    key: 'risk_acceptable',
+    pillar: 'Risk',
+    number: '12',
+    question: 'The planned risk is acceptable for the account and current conditions.',
+    explanation: 'Risk belongs in the preparation process from the beginning. A technically valid scenario can still be unsuitable if the risk is not acceptable.'
+  }
+];
+---
+
+<SiteLayout
+  title="Trade Preparation Checklist"
+  description="A free PairPilotFX trade preparation checklist for Context, Strength, Structure, Liquidity, Confirmation, and Risk."
+  canonicalPath="/tools/trade-preparation-checklist/"
+>
+  <section class="tool-hero">
+    <div class="container tool-hero-grid">
+      <div class="tool-copy">
+        <div class="pill">Free PairPilotFX tool</div>
+        <p class="eyebrow">Trade Preparation Checklist</p>
+        <h1>Turn a trade idea into a structured preparation decision.</h1>
+        <p class="lead">
+          Review the same six filters PairPilotFX uses before treating a scenario as prepared:
+          Context → Strength → Structure → Liquidity → Confirmation → Risk.
+        </p>
+        <p class="tool-note">Your checklist, instrument label, and notes are saved only in this browser on this device.</p>
+      </div>
+
+      <aside class="status-card card" aria-label="Checklist status summary">
+        <span class="status-kicker">PREPARATION STATUS</span>
+        <strong data-tool-status class="status-incomplete">Incomplete</strong>
+        <p data-tool-status-detail>Review every preparation check before treating this pass as complete.</p>
+        <progress data-tool-progress max="12" value="0">0 of 12 reviewed</progress>
+        <div class="status-meta">
+          <span data-tool-reviewed>0 of 12 reviewed</span>
+          <span data-tool-save-state>No saved checklist</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <form class="tool-shell card" data-trade-checklist>
+        <div class="tool-header">
+          <div class="field-grid">
+            <label>
+              <span>Instrument / scenario</span>
+              <input
+                type="text"
+                maxlength="60"
+                placeholder="e.g. AUD/USD — weekly pullback scenario"
+                data-tool-instrument
+              />
+            </label>
+            <label>
+              <span>Preparation notes</span>
+              <textarea
+                rows="3"
+                maxlength="1200"
+                placeholder="Optional local notes. These are not sent as analytics."
+                data-tool-context
+              ></textarea>
+            </label>
+          </div>
+          <div class="tool-actions">
+            <p>Choose <strong>Confirmed</strong> when the statement is true. Choose <strong>Waiting</strong> when the condition is not ready yet.</p>
+            <button type="button" class="button button-secondary" data-tool-reset>Reset checklist</button>
+          </div>
+        </div>
+
+        <div class="checklist">
+          {groups.map((item) => (
+            <fieldset class="check-row" data-check-group={item.key}>
+              <legend class="sr-only">{item.question}</legend>
+              <div class="check-index">{item.number}</div>
+              <div class="check-copy">
+                <span class="check-pillar">{item.pillar}</span>
+                <strong>{item.question}</strong>
+                <details>
+                  <summary>Why it matters</summary>
+                  <p>{item.explanation}</p>
+                </details>
+              </div>
+              <div class="state-options" role="group" aria-label={item.question + ' status'}>
+                <label>
+                  <input type="radio" name={item.key} value="confirmed" />
+                  <span>Confirmed</span>
+                </label>
+                <label>
+                  <input type="radio" name={item.key} value="waiting" />
+                  <span>Waiting</span>
+                </label>
+              </div>
+            </fieldset>
+          ))}
+        </div>
+
+        <div class="tool-footer">
+          <div>
+            <span class="status-kicker">HOW TO READ THE RESULT</span>
+            <p>
+              <strong>Incomplete</strong> means some checks are unanswered.
+              <strong>Waiting</strong> means every check was reviewed but at least one condition is not ready.
+              <strong>Complete</strong> means every listed condition is confirmed.
+            </p>
+          </div>
+          <p class="result-warning">
+            Complete does not mean BUY or SELL. It means only that this preparation checklist has been completed.
+          </p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container next-step card">
+      <div>
+        <p class="eyebrow">Keep the process consistent</p>
+        <h2>Use the checklist before the market asks you to make a fast decision.</h2>
+      </div>
+      <div>
+        <p>
+          PairPilotFX Weekly applies the same decision framework to market context, relative strength,
+          structure, liquidity, confirmation, and risk.
+        </p>
+        <a
+          class="button"
+          href="/weekly/"
+          data-analytics-event="weekly_brief_cta_click"
+          data-analytics-placement="trade_checklist"
+        >Explore the Weekly FX Brief →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container disclaimer">
+    <strong>Risk note</strong>
+    <p>
+      This checklist is an educational decision-support tool. It does not provide individualized investment
+      advice, a trade recommendation, position sizing, guaranteed outcomes, or autonomous execution.
+    </p>
+  </section>
+
+  <script>
+    import '../../scripts/tradeChecklist';
+  </script>
+</SiteLayout>
+
+<style>
+  .tool-hero { padding: 102px 0 68px; }
+  .tool-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr);
+    gap: 58px;
+    align-items: center;
+  }
+  .tool-copy { display: grid; gap: 22px; }
+  .tool-copy h1 { font-size: clamp(3rem, 6.6vw, 5.7rem); }
+  .tool-note { color: #7f96ae; font-size: .84rem; }
+
+  .status-card { padding: 28px; display: grid; gap: 14px; border-color: var(--border-strong); }
+  .status-kicker { color: #668199; font-size: .67rem; font-weight: 850; letter-spacing: .13em; }
+  .status-card > strong { font-size: clamp(2.2rem, 5vw, 4.1rem); letter-spacing: -.04em; }
+  .status-card p { color: var(--muted); }
+  .status-incomplete { color: #d4deea; }
+  .status-waiting { color: #f3cb78; }
+  .status-complete { color: #7ee2b8; }
+  progress {
+    appearance: none; width: 100%; height: 9px; border: 0; border-radius: 99px; overflow: hidden;
+    background: rgba(255,255,255,.07);
+  }
+  progress::-webkit-progress-bar { background: rgba(255,255,255,.07); border-radius: 99px; }
+  progress::-webkit-progress-value { background: var(--accent-strong); border-radius: 99px; }
+  progress::-moz-progress-bar { background: var(--accent-strong); border-radius: 99px; }
+  .status-meta { display: flex; justify-content: space-between; gap: 18px; color: #7890a8; font-size: .76rem; }
+
+  .tool-shell { overflow: hidden; }
+  .tool-header {
+    display: grid; grid-template-columns: 1fr .7fr; gap: 34px;
+    padding: clamp(24px, 4vw, 38px); border-bottom: 1px solid var(--border);
+  }
+  .field-grid { display: grid; gap: 18px; }
+  .field-grid label { display: grid; gap: 8px; color: #a8bbce; font-size: .82rem; font-weight: 700; }
+  input[type="text"], textarea {
+    width: 100%; border: 1px solid var(--border); border-radius: 10px;
+    background: rgba(4,13,23,.72); color: #edf6ff; padding: 12px 14px;
+    font: inherit; outline: none;
+  }
+  input[type="text"]:focus, textarea:focus { border-color: var(--accent-strong); box-shadow: 0 0 0 3px rgba(88,166,255,.08); }
+  textarea { resize: vertical; min-height: 92px; }
+  .tool-actions { display: grid; gap: 16px; align-content: end; }
+  .tool-actions p { color: var(--muted); font-size: .86rem; }
+  .tool-actions .button { width: fit-content; }
+
+  .checklist { display: grid; }
+  .check-row {
+    display: grid; grid-template-columns: 42px minmax(0,1fr) auto; gap: 18px; align-items: center;
+    margin: 0; padding: 22px clamp(20px, 4vw, 38px); border: 0; border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .check-row:last-child { border-bottom: 0; }
+  .check-index { color: #5b7691; font: 750 .72rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .check-copy { display: grid; gap: 6px; }
+  .check-pillar { color: var(--accent-strong); font-size: .67rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+  .check-copy strong { color: #edf6ff; font-size: .94rem; }
+  details { margin-top: 2px; color: var(--muted); font-size: .8rem; }
+  summary { color: #8ea8c2; cursor: pointer; width: fit-content; }
+  details p { margin-top: 8px; max-width: 760px; line-height: 1.6; }
+
+  .state-options { display: flex; gap: 8px; }
+  .state-options label { cursor: pointer; }
+  .state-options input { position: absolute; opacity: 0; pointer-events: none; }
+  .state-options span {
+    display: inline-flex; align-items: center; justify-content: center; min-width: 92px;
+    padding: 9px 12px; border: 1px solid var(--border); border-radius: 999px;
+    color: #9bb0c5; background: rgba(255,255,255,.025); font-size: .77rem; font-weight: 750;
+    transition: border-color .15s ease, background .15s ease, color .15s ease;
+  }
+  .state-options label:hover span { border-color: var(--border-strong); color: white; }
+  .state-options input[value="confirmed"]:checked + span {
+    color: #bdf1da; border-color: rgba(101,211,162,.45); background: rgba(101,211,162,.10);
+  }
+  .state-options input[value="waiting"]:checked + span {
+    color: #ffe0a3; border-color: rgba(243,203,120,.45); background: rgba(243,203,120,.09);
+  }
+  .state-options input:focus-visible + span { outline: 2px solid var(--accent-strong); outline-offset: 2px; }
+
+  .tool-footer {
+    display: grid; grid-template-columns: 1fr .7fr; gap: 34px;
+    padding: clamp(24px, 4vw, 38px); background: rgba(88,166,255,.035);
+  }
+  .tool-footer div { display: grid; gap: 10px; }
+  .tool-footer p { color: var(--muted); font-size: .84rem; }
+  .result-warning { align-self: center; color: #b9cadd !important; }
+
+  .next-step {
+    display: grid; grid-template-columns: 1fr .8fr; gap: 48px; align-items: center;
+    padding: clamp(30px, 5vw, 56px); border-color: var(--border-strong);
+  }
+  .next-step > div { display: grid; gap: 17px; }
+  .next-step p { color: var(--muted); }
+  .next-step .button { width: fit-content; }
+
+  .disclaimer {
+    display: grid; grid-template-columns: auto 1fr; gap: 20px;
+    padding-top: 0; padding-bottom: 72px; color: #7890a8; font-size: .78rem;
+  }
+  .disclaimer strong { color: #9ab1c7; white-space: nowrap; }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  @media (max-width: 900px) {
+    .tool-hero { padding-top: 78px; }
+    .tool-hero-grid, .tool-header, .tool-footer, .next-step { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 720px) {
+    .check-row { grid-template-columns: 30px minmax(0,1fr); }
+    .state-options { grid-column: 2; flex-wrap: wrap; }
+  }
+
+  @media (max-width: 520px) {
+    .status-meta { flex-direction: column; gap: 5px; }
+    .state-options { display: grid; grid-template-columns: 1fr 1fr; }
+    .state-options span { width: 100%; min-width: 0; }
+    .disclaimer { grid-template-columns: 1fr; gap: 7px; }
+  }
+</style>
