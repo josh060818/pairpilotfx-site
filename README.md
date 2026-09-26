@@ -23,10 +23,11 @@ The private PairPilotFX automation/Radar backend remains a separate system and i
 - `/weekly/` — Weekly FX Brief acquisition page
 - `/tools/` — free trader tools landing page
 - `/tools/trade-preparation-checklist/` — interactive PairPilot Trade Preparation Checklist
+- `/radar/` — PairPilot Radar product page
 - `/privacy/` — Privacy Policy
 - `/terms/` — Terms of Service
 
-Phase 6B routes site-level Weekly Brief CTAs through `/weekly/` before the final Substack subscription handoff. Phase 6C adds the first free trader tool. Dedicated Radar product and early-access work belong to later Phase 6 increments.
+Phase 6B routes site-level Weekly Brief CTAs through `/weekly/` before the final Substack subscription handoff. Phase 6C adds the first free trader tool. Phase 6D adds the dedicated Radar product surface. Early-access work belongs to a later Phase 6 increment.
 
 ## Analytics foundation
 
@@ -65,6 +66,19 @@ The PairPilot Trade Preparation Checklist is implemented.
 - instrument/scenario labels, optional notes, and checklist answers are persisted in browser `localStorage` and are not included in analytics;
 - tool acquisition and usage are measurable through `free_tool_cta_click`, `tool_open`, `tool_complete`, and `tool_reset`;
 - the tool links naturally back to the Weekly FX Brief as the next owned-audience step.
+
+## Phase 6D — PairPilot Radar product page
+
+The public Radar product surface is implemented.
+
+- `/radar/` explains the problem Radar is intended to solve without exposing the private operational backend;
+- the page presents Radar as a staged market-selection and preparation layer rather than a prediction engine;
+- the product model follows Context → Strength → Structure → Liquidity → Confirmation → Risk;
+- public messaging makes the distinction between attention, location, missing confirmation, and invalidation explicit;
+- product boundaries clearly state that Radar is not a BUY/SELL signal service, guaranteed-outcome product, or autonomous execution system;
+- the page states that public Radar access is not yet open and that early-access enrollment will be introduced separately;
+- homepage, methodology, header, and footer Radar links now route to the owned `/radar/` product page;
+- Radar entry clicks continue to use the `radar_cta_click` analytics event, while follow-on Weekly Brief and free-tool CTAs use their existing funnel events.
 
 ## Local development
 
