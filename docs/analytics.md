@@ -102,7 +102,7 @@ Implemented now:
 | `weekly_brief_subscribe_click` | outbound subscription CTA from the Weekly Brief page to Substack |
 | `weekly_brief_learn_more_click` | Weekly Brief page jump to the content/benefits section |
 | `substack_click` | general research/Substack link |
-| `radar_cta_click` | Radar methodology/product-interest link |
+| `radar_cta_click` | CTA that routes a visitor to the dedicated PairPilot Radar product page |
 | `methodology_cta_click` | homepage methodology CTA |
 | `free_tool_cta_click` | CTA that routes a visitor to a free PairPilotFX tool |
 | `tool_open` | Trade Preparation Checklist loaded in the browser |
