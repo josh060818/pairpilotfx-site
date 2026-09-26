@@ -1,0 +1,356 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+---
+
+<SiteLayout
+  title="PairPilot Radar Early Access"
+  description="Join the PairPilot Radar early-access waitlist and help shape the next stage of PairPilotFX decision support."
+  canonicalPath="/early-access/"
+>
+  <main data-early-access>
+    <section class="early-hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="pill"><span class="status-dot"></span> Radar early-access waitlist</div>
+          <p class="eyebrow">PairPilot Radar</p>
+          <h1>Help shape the product before public release.</h1>
+          <p class="lead">
+            Join the Radar early-access waitlist if you want to test a structured market-selection and
+            preparation workflow built around Context, Strength, Structure, Liquidity, Confirmation, and Risk.
+          </p>
+          <div class="expectation-list">
+            <div><span>01</span><p><strong>Not automatic access.</strong> The waitlist helps PairPilotFX identify a small group of suitable Phase 7 testers.</p></div>
+            <div><span>02</span><p><strong>No signal service.</strong> Radar is designed to support judgment and watchlist selection—not generate BUY/SELL commands.</p></div>
+            <div><span>03</span><p><strong>Feedback matters.</strong> Early testers may be asked what is useful, confusing, missing, or worth returning for.</p></div>
+          </div>
+        </div>
+
+        <aside class="fit-card card" aria-label="Radar early-access tester profile">
+          <span class="card-kicker">EARLY-ACCESS FOCUS</span>
+          <h2>We are looking for traders who care about the process before the entry.</h2>
+          <ul>
+            <li>multi-timeframe market preparation;</li>
+            <li>relative-strength and pair selection;</li>
+            <li>structure and liquidity context;</li>
+            <li>clear confirmation and invalidation;</li>
+            <li>reducing unnecessary chart scanning.</li>
+          </ul>
+          <a
+            href="/radar/"
+            data-analytics-event="radar_cta_click"
+            data-analytics-placement="early_access_fit_card"
+          >Review the Radar product model →</a>
+        </aside>
+      </div>
+    </section>
+
+    <div class="container"><div class="rule"></div></div>
+
+    <section class="section">
+      <div class="container form-grid">
+        <div class="form-copy">
+          <p class="eyebrow">Join the waitlist</p>
+          <h2>A few details will help us choose useful testers later.</h2>
+          <p class="lead">
+            Email is required so PairPilotFX can contact you about Radar early access. Everything else is
+            optional and is used only to understand tester fit and product needs.
+          </p>
+
+          <div class="privacy-note card">
+            <strong>Privacy boundary</strong>
+            <p>
+              Waitlist form details are submitted separately from the private PairPilotFX automation backend.
+              Email addresses and free-text answers are not included in website analytics events.
+            </p>
+          </div>
+        </div>
+
+        <div class="form-card card">
+          <p class="returning-note" data-waitlist-returning hidden>
+            This browser previously submitted the Radar waitlist. You can submit again if you want to update your details.
+          </p>
+
+          <form
+            action="https://formsubmit.co/pairpilotfx@gmail.com"
+            method="POST"
+            data-waitlist-form
+          >
+            <input type="hidden" name="_subject" value="PairPilot Radar early access signup" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="https://pairpilotfx.com/early-access/thanks/?submitted=1" />
+            <input class="honey" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+            <div class="field-row">
+              <label>
+                <span>First name <em>optional</em></span>
+                <input type="text" name="first_name" maxlength="60" autocomplete="given-name" />
+              </label>
+              <label>
+                <span>Email <strong>required</strong></span>
+                <input type="email" name="email" maxlength="160" autocomplete="email" required />
+              </label>
+            </div>
+
+            <label>
+              <span>Trading experience <em>optional</em></span>
+              <select name="experience">
+                <option value="">Prefer not to say</option>
+                <option value="less_than_1_year">Less than 1 year</option>
+                <option value="1_to_3_years">1–3 years</option>
+                <option value="3_to_5_years">3–5 years</option>
+                <option value="5_plus_years">5+ years</option>
+              </select>
+            </label>
+
+            <fieldset class="pair-fieldset">
+              <legend>Markets you regularly watch <em>optional</em></legend>
+              <div class="pair-options">
+                <label><input type="checkbox" name="pairs" value="AUD/USD" /><span>AUD/USD</span></label>
+                <label><input type="checkbox" name="pairs" value="NZD/USD" /><span>NZD/USD</span></label>
+                <label><input type="checkbox" name="pairs" value="AUD/CAD" /><span>AUD/CAD</span></label>
+                <label><input type="checkbox" name="pairs" value="NZD/CAD" /><span>NZD/CAD</span></label>
+                <label><input type="checkbox" name="pairs" value="XAU/USD" /><span>XAU/USD</span></label>
+                <label><input type="checkbox" name="pairs" value="Other FX" /><span>Other FX</span></label>
+              </div>
+            </fieldset>
+
+            <label>
+              <span>What is the biggest problem with your current scanning or preparation process? <em>optional</em></span>
+              <textarea
+                name="scanning_problem"
+                rows="4"
+                maxlength="1000"
+                placeholder="Example: I spend too much time scanning pairs that never become actionable."
+              ></textarea>
+            </label>
+
+            <label>
+              <span>What would you most want Radar to help you do? <em>optional</em></span>
+              <textarea
+                name="desired_help"
+                rows="4"
+                maxlength="1000"
+                placeholder="Example: Narrow my watchlist and show me what condition is still missing."
+              ></textarea>
+            </label>
+
+            <label class="consent">
+              <input type="checkbox" name="consent" value="yes" required />
+              <span>
+                I agree that PairPilotFX may use the information I submit to manage the Radar early-access
+                waitlist and contact me about Radar testing. I understand that joining does not guarantee access.
+              </span>
+            </label>
+
+            <div class="submit-row">
+              <button class="button" type="submit" data-waitlist-submit>Join Radar Early Access →</button>
+              <span class="submit-status" data-waitlist-status role="status" aria-live="polite"></span>
+            </div>
+
+            <p class="form-footnote">
+              By submitting, you acknowledge the <a href="/privacy/">Privacy Policy</a>. Radar remains a developing
+              educational decision-support product and does not provide individualized investment advice or trade signals.
+            </p>
+          </form>
+
+          <div class="success-panel" data-waitlist-success hidden>
+            <span class="success-mark" aria-hidden="true">✓</span>
+            <p class="eyebrow">Waitlist received</p>
+            <h2>You're on the Radar early-access list.</h2>
+            <p>
+              PairPilotFX will use this list when selecting a small group of testers for the next product phase.
+              Joining the waitlist does not guarantee an invitation.
+            </p>
+            <div class="button-row">
+              <a
+                class="button"
+                href="/weekly/"
+                data-analytics-event="weekly_brief_cta_click"
+                data-analytics-placement="early_access_success"
+              >Follow the Weekly FX Brief →</a>
+              <a
+                class="button button-secondary"
+                href="/tools/trade-preparation-checklist/"
+                data-analytics-event="free_tool_cta_click"
+                data-analytics-placement="early_access_success"
+              >Use the free checklist</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-tight">
+      <div class="container what-next card">
+        <div>
+          <p class="eyebrow">What happens next</p>
+          <h2>Waitlist first. Small tester group second.</h2>
+        </div>
+        <div class="steps">
+          <div><span>01</span><p><strong>Join the list.</strong> Tell us enough to understand how you currently prepare for trades.</p></div>
+          <div><span>02</span><p><strong>PairPilotFX reviews fit.</strong> Tester selection will consider product needs, capacity, and useful variation in experience.</p></div>
+          <div><span>03</span><p><strong>Selected testers are contacted.</strong> Invitations and testing instructions will be sent separately when the private alpha is ready.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container disclaimer">
+      <strong>Risk note</strong>
+      <p>
+        Joining the Radar early-access waitlist does not create an advisory relationship, guarantee access,
+        or imply that any market scenario will result in a trade or profitable outcome.
+      </p>
+    </section>
+
+    <script>
+      import '../../scripts/earlyAccess';
+    </script>
+  </main>
+</SiteLayout>
+
+<style>
+  .early-hero { padding: 104px 0 82px; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.07fr) minmax(360px, .93fr);
+    gap: 58px;
+    align-items: center;
+  }
+  .hero-copy { display: grid; gap: 22px; }
+  .hero-copy h1 { font-size: clamp(3rem, 6.8vw, 5.8rem); }
+  .status-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: #7ee2b8;
+    box-shadow: 0 0 0 5px rgba(126,226,184,.08);
+  }
+  .expectation-list { display: grid; gap: 14px; margin-top: 8px; }
+  .expectation-list > div {
+    display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start;
+    color: var(--muted); font-size: .86rem;
+  }
+  .expectation-list > div > span {
+    color: #587691; font: 750 .71rem/1.7 ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .expectation-list strong { color: #d9e8f6; }
+
+  .fit-card { display: grid; gap: 18px; padding: clamp(26px, 4vw, 40px); border-color: var(--border-strong); }
+  .fit-card h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); }
+  .fit-card ul { display: grid; gap: 10px; margin: 0; padding-left: 20px; color: #b9cadd; }
+  .fit-card a { color: var(--accent-strong); text-decoration: none; font-weight: 750; font-size: .9rem; }
+  .fit-card a:hover { text-decoration: underline; }
+  .card-kicker { color: #668199; font-size: .67rem; font-weight: 850; letter-spacing: .13em; }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: .72fr 1.28fr;
+    gap: 52px;
+    align-items: start;
+  }
+  .form-copy { display: grid; gap: 18px; position: sticky; top: 104px; }
+  .privacy-note { display: grid; gap: 8px; padding: 20px; margin-top: 10px; }
+  .privacy-note strong { color: #dcecff; }
+  .privacy-note p { color: var(--muted); font-size: .82rem; }
+
+  .form-card { padding: clamp(24px, 4vw, 40px); border-color: var(--border-strong); }
+  form { display: grid; gap: 22px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1.2fr; gap: 18px; }
+  form > label, .field-row label { display: grid; gap: 8px; color: #b7c9da; font-size: .83rem; font-weight: 700; }
+  label span em, legend em { color: #728ba3; font-style: normal; font-weight: 500; }
+  label span strong { color: #8fc7ff; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; }
+  input[type="text"], input[type="email"], select, textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: rgba(4,13,23,.72);
+    color: #edf6ff;
+    padding: 12px 14px;
+    outline: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--accent-strong);
+    box-shadow: 0 0 0 3px rgba(88,166,255,.08);
+  }
+  textarea { resize: vertical; min-height: 110px; }
+  select { appearance: auto; }
+
+  .pair-fieldset { display: grid; gap: 11px; margin: 0; padding: 0; border: 0; }
+  .pair-fieldset legend { color: #b7c9da; font-size: .83rem; font-weight: 700; margin-bottom: 8px; }
+  .pair-options { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pair-options label { cursor: pointer; }
+  .pair-options input { position: absolute; opacity: 0; pointer-events: none; }
+  .pair-options span {
+    display: inline-flex; padding: 8px 12px; border: 1px solid var(--border); border-radius: 999px;
+    color: #9db2c7; background: rgba(255,255,255,.025); font-size: .76rem; font-weight: 750;
+  }
+  .pair-options input:checked + span {
+    color: #cfe8ff; border-color: rgba(88,166,255,.45); background: rgba(88,166,255,.11);
+  }
+  .pair-options input:focus-visible + span { outline: 2px solid var(--accent-strong); outline-offset: 2px; }
+
+  .consent {
+    display: grid !important;
+    grid-template-columns: 20px 1fr;
+    gap: 10px !important;
+    align-items: start;
+    color: var(--muted) !important;
+    font-size: .78rem !important;
+    font-weight: 500 !important;
+  }
+  .consent input { margin: 4px 0 0; accent-color: var(--accent); }
+  .submit-row { display: grid; gap: 12px; justify-items: start; }
+  .submit-row .button { border: 0; cursor: pointer; }
+  .submit-row .button:disabled { cursor: wait; opacity: .7; transform: none; }
+  .submit-status { min-height: 20px; color: #91a8bf; font-size: .8rem; }
+  .submit-status[data-state="error"] { color: #ffb4aa; }
+  .form-footnote { color: #71899f; font-size: .74rem; line-height: 1.55; }
+  .form-footnote a { color: #9fcfff; }
+  .returning-note {
+    margin-bottom: 22px; padding: 12px 14px; border: 1px solid rgba(126,226,184,.24);
+    border-radius: 10px; background: rgba(126,226,184,.06); color: #b9ddce; font-size: .8rem;
+  }
+  .honey { position: absolute !important; left: -9999px !important; width: 1px !important; height: 1px !important; }
+
+  .success-panel { display: grid; gap: 18px; }
+  .success-mark {
+    display: inline-grid; place-items: center; width: 46px; height: 46px; border-radius: 50%;
+    background: rgba(126,226,184,.10); border: 1px solid rgba(126,226,184,.35); color: #7ee2b8;
+    font-size: 1.3rem; font-weight: 900;
+  }
+  .success-panel > p:not(.eyebrow) { color: var(--muted); }
+  .success-panel .button-row { margin-top: 8px; }
+
+  .what-next {
+    display: grid;
+    grid-template-columns: .75fr 1.25fr;
+    gap: 50px;
+    padding: clamp(28px, 5vw, 54px);
+    border-color: var(--border-strong);
+  }
+  .what-next > div:first-child { display: grid; gap: 14px; align-content: start; }
+  .steps { display: grid; }
+  .steps > div {
+    display: grid; grid-template-columns: 36px 1fr; gap: 12px;
+    padding: 17px 0; border-bottom: 1px solid rgba(255,255,255,.07);
+  }
+  .steps > div:last-child { border-bottom: 0; }
+  .steps span { color: #5b7691; font: 750 .71rem/1.7 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .steps p { color: var(--muted); font-size: .84rem; }
+  .steps strong { color: #dcecff; }
+
+  .disclaimer {
+    display: grid; grid-template-columns: auto 1fr; gap: 20px;
+    padding-top: 0; padding-bottom: 72px; color: #7890a8; font-size: .78rem;
+  }
+  .disclaimer strong { color: #9ab1c7; white-space: nowrap; }
+
+  @media (max-width: 920px) {
+    .early-hero { padding-top: 78px; }
+    .hero-grid, .form-grid, .what-next { grid-template-columns: 1fr; }
+    .form-copy { position: static; }
+  }
+
+  @media (max-width: 620px) {
+    .field-row { grid-template-columns: 1fr; }
+    .disclaimer { grid-template-columns: 1fr; gap: 7px; }
+  }
+</style>
