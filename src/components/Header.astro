@@ -23,6 +23,12 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
         data-analytics-event="free_tool_cta_click"
         data-analytics-placement="header"
       >Tools</a>
+      <a
+        class:list={[{ active: isActive('/radar/') }]}
+        href="/radar/"
+        data-analytics-event="radar_cta_click"
+        data-analytics-placement="header"
+      >Radar</a>
     </nav>
   </div>
 </header>
@@ -72,9 +78,11 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
     background: rgba(255,255,255,.06);
   }
   @media (max-width: 620px) {
-    .nav { min-height: 62px; }
-    .nav-links a:first-child { display: none; }
+    .nav { min-height: 62px; gap: 12px; }
+    .nav-links a:first-child,
+    .nav-links a[href="/about/"] { display: none; }
     .nav-links { gap: 2px; }
-    .nav-links a { padding-inline: 8px; font-size: .84rem; }
+    .nav-links a { padding-inline: 7px; font-size: .8rem; }
+    .brand { font-size: 1rem; }
   }
 </style>

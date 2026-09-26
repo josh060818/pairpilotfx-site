@@ -1,0 +1,394 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+---
+
+<SiteLayout
+  title="PairPilot Radar"
+  description="PairPilot Radar is the developing PairPilotFX decision-support product for filtering markets through context, relative strength, structure, liquidity, confirmation, and risk."
+  canonicalPath="/radar/"
+>
+  <section class="radar-hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="pill"><span class="status-dot"></span> Product in development</div>
+        <p class="eyebrow">PairPilot Radar</p>
+        <h1>Filter the market before deeper chart analysis begins.</h1>
+        <p class="lead">
+          Radar is the developing decision-support product behind PairPilotFX. Its job is to reduce a broad
+          trading universe into a smaller set of markets that deserve attention—and make the missing conditions
+          visible when they do not.
+        </p>
+        <div class="button-row">
+          <a
+            class="button"
+            href="/tools/trade-preparation-checklist/"
+            data-analytics-event="free_tool_cta_click"
+            data-analytics-placement="radar_hero"
+          >Use the free checklist →</a>
+          <a
+            class="button button-secondary"
+            href="/weekly/"
+            data-analytics-event="weekly_brief_cta_click"
+            data-analytics-placement="radar_hero"
+          >See the framework applied weekly</a>
+        </div>
+        <p class="availability-note">
+          Public Radar access is not open yet. Early-access registration will be introduced separately.
+        </p>
+      </div>
+
+      <aside class="radar-terminal card" aria-label="Illustration of the PairPilot Radar filtering process">
+        <div class="terminal-bar">
+          <span>PAIRPILOT / RADAR</span>
+          <span class="terminal-status">DECISION SUPPORT</span>
+        </div>
+        <div class="universe-row">
+          <span>UNIVERSE</span>
+          <strong>AUD/USD · NZD/USD · AUD/CAD · NZD/CAD · XAU/USD</strong>
+        </div>
+        <div class="filter-row"><span>01</span><strong>CONTEXT</strong><em>environment usable?</em></div>
+        <div class="filter-row"><span>02</span><strong>STRENGTH</strong><em>meaningful separation?</em></div>
+        <div class="filter-row"><span>03</span><strong>STRUCTURE</strong><em>timeframes coherent?</em></div>
+        <div class="filter-row"><span>04</span><strong>LIQUIDITY</strong><em>decision area relevant?</em></div>
+        <div class="filter-row"><span>05</span><strong>CONFIRMATION</strong><em>what still must happen?</em></div>
+        <div class="terminal-result">
+          <span>OUTPUT</span>
+          <strong>FOCUS THE WATCHLIST — DO NOT GENERATE A TRADE SIGNAL</strong>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="container"><div class="rule"></div></div>
+
+  <section class="section">
+    <div class="container problem-grid">
+      <div class="section-copy">
+        <p class="eyebrow">The problem Radar is built to solve</p>
+        <h2>Most of the market does not deserve equal attention.</h2>
+        <p class="lead">
+          Radar is intended to make selection explicit before a trader spends time on lower-timeframe chart
+          analysis. The objective is fewer weak candidates, clearer reasons for focus, and a visible reason to wait.
+        </p>
+      </div>
+      <div class="grid-3 problem-cards">
+        <article class="card card-pad">
+          <span class="card-index">01 / NOISE</span>
+          <h3>Too many markets</h3>
+          <p>A broad watchlist creates more charts, more narratives, and more opportunities to rationalize weak setups.</p>
+        </article>
+        <article class="card card-pad">
+          <span class="card-index">02 / CONTEXT</span>
+          <h3>Structure without environment</h3>
+          <p>A clean chart can still sit inside poor macro, event-risk, or relative-strength conditions.</p>
+        </article>
+        <article class="card card-pad">
+          <span class="card-index">03 / TIMING</span>
+          <h3>A scenario mistaken for an entry</h3>
+          <p>Radar keeps the distinction between an interesting market and a confirmed execution condition visible.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container workflow card">
+      <div class="workflow-heading">
+        <p class="eyebrow">How the product thinks</p>
+        <h2>A staged filter, not a prediction engine.</h2>
+        <p>
+          Each layer answers a different question. A market that fails an earlier filter should not receive
+          the same analysis effort as one that continues to earn attention.
+        </p>
+      </div>
+
+      <div class="workflow-list">
+        <div>
+          <span>01</span>
+          <strong>Context</strong>
+          <p>Map macro conditions, event risk, and the broader environment before assigning importance to a chart pattern.</p>
+        </div>
+        <div>
+          <span>02</span>
+          <strong>Strength</strong>
+          <p>Look for useful relative-strength separation instead of treating every currency relationship as equally actionable.</p>
+        </div>
+        <div>
+          <span>03</span>
+          <strong>Structure</strong>
+          <p>Check whether higher and execution timeframes tell a coherent story rather than forcing alignment where it does not exist.</p>
+        </div>
+        <div>
+          <span>04</span>
+          <strong>Liquidity</strong>
+          <p>Identify the decision area and nearby liquidity so location remains part of the scenario instead of an afterthought.</p>
+        </div>
+        <div>
+          <span>05</span>
+          <strong>Confirmation</strong>
+          <p>Keep the missing trigger explicit. A market may deserve monitoring while still requiring evidence before execution.</p>
+        </div>
+        <div>
+          <span>06</span>
+          <strong>Risk</strong>
+          <p>Define invalidation and suitability before a scenario can be treated as fully prepared.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container output-grid">
+      <div class="section-copy">
+        <p class="eyebrow">What a useful Radar output should answer</p>
+        <h2>Why this market, why now, and what is still missing?</h2>
+        <p class="lead">
+          Radar is designed to surface reasoning rather than hide it behind a score. The useful output is the
+          chain of evidence that explains whether a market belongs on the active watchlist.
+        </p>
+      </div>
+
+      <div class="output-cards">
+        <article class="card card-pad output-card">
+          <span class="output-label">ATTENTION</span>
+          <h3>Does this market deserve deeper analysis?</h3>
+          <p>Context, relative strength, and structure should provide a reason to spend more time here than elsewhere.</p>
+        </article>
+        <article class="card card-pad output-card">
+          <span class="output-label">LOCATION</span>
+          <h3>Is price at a meaningful decision area?</h3>
+          <p>The product should distinguish an interesting market from one that is actually approaching a relevant location.</p>
+        </article>
+        <article class="card card-pad output-card">
+          <span class="output-label">MISSING CONDITION</span>
+          <h3>What still needs to happen?</h3>
+          <p>When confirmation is absent, the output should preserve the wait condition rather than convert interest into a signal.</p>
+        </article>
+        <article class="card card-pad output-card">
+          <span class="output-label">INVALIDATION</span>
+          <h3>What would weaken the scenario?</h3>
+          <p>Risk and invalidation remain part of the decision map instead of being added only after entry.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container boundaries card">
+      <div class="boundaries-heading">
+        <p class="eyebrow">Product boundaries</p>
+        <h2>Radar is designed to support judgment, not replace it.</h2>
+      </div>
+      <div class="boundary-grid">
+        <div>
+          <span class="boundary-yes">RADAR IS</span>
+          <ul>
+            <li>a market-selection and preparation layer;</li>
+            <li>a structured way to apply the PairPilotFX framework consistently;</li>
+            <li>a way to keep missing confirmation and invalidation visible;</li>
+            <li>decision support for deeper human analysis.</li>
+          </ul>
+        </div>
+        <div>
+          <span class="boundary-no">RADAR IS NOT</span>
+          <ul>
+            <li>an automated BUY/SELL signal service;</li>
+            <li>a promise that a monitored scenario will become a trade;</li>
+            <li>autonomous order execution;</li>
+            <li>a substitute for a trader's own risk controls.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container status-grid">
+      <div>
+        <p class="eyebrow">Development status</p>
+        <h2>The engine is being developed privately. The public product comes later.</h2>
+      </div>
+      <div class="status-copy">
+        <p>
+          PairPilotFX currently uses Radar concepts inside its private research and operational workflow.
+          This public page explains the product model without exposing private services, credentials,
+          infrastructure, or internal administration endpoints.
+        </p>
+        <p>
+          Public access, account behavior, and early-access enrollment will be introduced as separate product
+          work. Until then, the Weekly FX Brief and Trade Preparation Checklist are the public ways to use the
+          same decision framework.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container closing card">
+      <div>
+        <p class="eyebrow">Use the framework today</p>
+        <h2>You do not need Radar access to start filtering better.</h2>
+        <p>
+          Use the free checklist for your own preparation, or follow the Weekly FX Brief to see the framework
+          applied to market context and pair selection.
+        </p>
+      </div>
+      <div class="closing-actions">
+        <a
+          class="button"
+          href="/tools/trade-preparation-checklist/"
+          data-analytics-event="free_tool_cta_click"
+          data-analytics-placement="radar_closing"
+        >Open the free checklist →</a>
+        <a
+          class="button button-secondary"
+          href="/weekly/"
+          data-analytics-event="weekly_brief_cta_click"
+          data-analytics-placement="radar_closing"
+        >Explore the Weekly FX Brief</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container disclaimer">
+    <strong>Risk note</strong>
+    <p>
+      PairPilot Radar is a developing educational decision-support product. It does not provide individualized
+      investment advice, guaranteed outcomes, trade signals, or autonomous trade execution.
+    </p>
+  </section>
+</SiteLayout>
+
+<style>
+  .radar-hero { padding: 106px 0 84px; overflow: hidden; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(390px, .92fr);
+    gap: 58px;
+    align-items: center;
+  }
+  .hero-copy { display: grid; gap: 23px; }
+  .hero-copy h1 { font-size: clamp(3rem, 6.8vw, 5.8rem); }
+  .status-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: #f3cb78;
+    box-shadow: 0 0 0 5px rgba(243,203,120,.08);
+  }
+  .availability-note { color: #7f96ae; font-size: .84rem; }
+
+  .radar-terminal { overflow: hidden; box-shadow: var(--shadow); }
+  .terminal-bar {
+    display: flex; justify-content: space-between; gap: 14px;
+    padding: 15px 18px; border-bottom: 1px solid var(--border);
+    color: #7f96ae; font-size: .67rem; font-weight: 850; letter-spacing: .11em;
+    background: rgba(255,255,255,.025);
+  }
+  .terminal-status { color: var(--accent-strong); }
+  .universe-row {
+    display: grid; gap: 8px; padding: 22px 20px;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    background: rgba(88,166,255,.035);
+  }
+  .universe-row span, .terminal-result span {
+    color: #668199; font-size: .67rem; font-weight: 850; letter-spacing: .12em;
+  }
+  .universe-row strong {
+    color: #c7dff4;
+    font: 750 .78rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .filter-row {
+    display: grid; grid-template-columns: 34px 1fr auto; gap: 12px; align-items: center;
+    padding: 17px 20px; border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .filter-row span { color: #55708a; font: 700 .72rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .filter-row strong { font: 800 .76rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .07em; }
+  .filter-row em { color: #85a0b9; font: normal .74rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .terminal-result {
+    display: grid; gap: 7px; padding: 24px 20px;
+    background: linear-gradient(90deg, rgba(88,166,255,.08), rgba(88,166,255,.02));
+  }
+  .terminal-result strong {
+    color: #bfe0ff;
+    font: 800 .83rem/1.45 ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  .problem-grid { display: grid; gap: 38px; }
+  .section-copy { display: grid; gap: 18px; max-width: 920px; }
+  .problem-cards article { display: grid; gap: 15px; min-height: 235px; }
+  .problem-cards p { color: var(--muted); }
+  .card-index, .output-label {
+    color: #668199; font-size: .67rem; font-weight: 850; letter-spacing: .13em;
+  }
+
+  .workflow {
+    display: grid; grid-template-columns: .72fr 1.28fr; gap: 48px;
+    padding: clamp(28px, 5vw, 56px); border-color: var(--border-strong);
+  }
+  .workflow-heading { display: grid; gap: 17px; align-content: start; }
+  .workflow-heading p:last-child { color: var(--muted); }
+  .workflow-list { display: grid; }
+  .workflow-list > div {
+    display: grid; grid-template-columns: 38px 120px 1fr; gap: 12px;
+    padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,.07);
+  }
+  .workflow-list > div:last-child { border-bottom: 0; }
+  .workflow-list span { color: #5b7691; font: 750 .71rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .workflow-list strong { color: #f0f7ff; }
+  .workflow-list p { color: var(--muted); font-size: .84rem; }
+
+  .output-grid { display: grid; grid-template-columns: .72fr 1.28fr; gap: 52px; align-items: start; }
+  .output-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .output-card { display: grid; gap: 14px; min-height: 230px; }
+  .output-card p { color: var(--muted); }
+
+  .boundaries {
+    display: grid; gap: 34px; padding: clamp(28px, 5vw, 56px);
+    border-color: var(--border-strong);
+    background:
+      radial-gradient(circle at 90% 0%, rgba(88,166,255,.10), transparent 25rem),
+      linear-gradient(145deg, rgba(18,38,61,.95), rgba(8,21,37,.95));
+  }
+  .boundaries-heading { display: grid; gap: 14px; max-width: 850px; }
+  .boundary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .boundary-grid > div {
+    border: 1px solid var(--border); border-radius: 16px; padding: 24px;
+    background: rgba(3,12,22,.26);
+  }
+  .boundary-grid ul { margin: 16px 0 0; padding-left: 19px; color: #b9cadd; display: grid; gap: 10px; }
+  .boundary-yes, .boundary-no { font-size: .7rem; font-weight: 850; letter-spacing: .13em; }
+  .boundary-yes { color: #7ee2b8; }
+  .boundary-no { color: #f3cb78; }
+
+  .status-grid {
+    display: grid; grid-template-columns: .9fr 1.1fr; gap: 52px; align-items: start;
+  }
+  .status-copy { display: grid; gap: 18px; color: var(--muted-strong); }
+
+  .closing {
+    display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center;
+    padding: clamp(30px, 5vw, 58px); border-color: var(--border-strong);
+  }
+  .closing > div:first-child { display: grid; gap: 17px; }
+  .closing > div:first-child p:last-child { color: var(--muted); }
+  .closing-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-start; }
+
+  .disclaimer {
+    display: grid; grid-template-columns: auto 1fr; gap: 20px;
+    padding-top: 0; padding-bottom: 72px; color: #7890a8; font-size: .78rem;
+  }
+  .disclaimer strong { color: #9ab1c7; white-space: nowrap; }
+
+  @media (max-width: 920px) {
+    .radar-hero { padding-top: 78px; }
+    .hero-grid, .workflow, .output-grid, .status-grid, .closing { grid-template-columns: 1fr; }
+    .radar-terminal { max-width: 680px; }
+  }
+
+  @media (max-width: 680px) {
+    .output-cards, .boundary-grid { grid-template-columns: 1fr; }
+    .workflow-list > div { grid-template-columns: 30px 1fr; }
+    .workflow-list p { grid-column: 2; }
+    .filter-row { grid-template-columns: 28px 1fr; }
+    .filter-row em { grid-column: 2; }
+    .disclaimer { grid-template-columns: 1fr; gap: 7px; }
+  }
+</style>
