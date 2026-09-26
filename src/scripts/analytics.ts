@@ -252,10 +252,14 @@ function startGoogleAnalytics(): void {
   };
 
   analyticsWindow.gtag('js', new Date());
+  const referrerHost = getReferrerHost();
+
   analyticsWindow.gtag('config', measurementId, {
     send_page_view: false,
     allow_google_signals: false,
-    allow_ad_personalization_signals: false
+    allow_ad_personalization_signals: false,
+    page_location: `${window.location.origin}${window.location.pathname}`,
+    page_referrer: referrerHost ? `https://${referrerHost}/` : ''
   });
 
   const script = document.createElement('script');
