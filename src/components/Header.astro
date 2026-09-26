@@ -5,7 +5,6 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
 <header class="site-header">
   <div class="container nav">
     <a class="brand" href="/" aria-label="PairPilotFX home">
-      <span class="brand-mark-shell" aria-hidden="true"><img class="brand-mark" src="/brand/pairpilotfx-compass.png" width="44" height="44" alt="" /></span>
       <span>PairPilot<span class="brand-accent">FX</span></span>
     </a>
 
@@ -44,26 +43,6 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
     font-size: 1.08rem;
   }
   .brand-accent { color: var(--accent-strong); }
-  .brand-mark-shell {
-    width: 34px;
-    height: 34px;
-    display: grid;
-    place-items: center;
-    flex: 0 0 auto;
-    overflow: hidden;
-    border-radius: 50%;
-    background: #ffffff;
-    box-shadow:
-      0 0 0 1px rgba(255,255,255,.18),
-      0 4px 14px rgba(0,0,0,.22);
-  }
-  .brand-mark {
-    width: 44px;
-    height: 44px;
-    max-width: none;
-    object-fit: contain;
-    transform: scale(1.28);
-  }
   .nav-links {
     display: flex;
     align-items: center;
