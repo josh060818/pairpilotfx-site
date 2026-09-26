@@ -52,6 +52,8 @@ const consentRequired = import.meta.env.PUBLIC_ANALYTICS_CONSENT_REQUIRED !== 'f
 
 let gaStarted = false;
 let activeTrack: ((eventName: string, properties?: AnalyticsProperties) => void) | null = null;
+let activeAttribution: AttributionState | null = null;
+let pendingExternalEvents: AnalyticsEventPayload[] = [];
 
 function sessionStorageSafe(): Storage | null {
   try {
@@ -241,6 +243,19 @@ function gaParams(payload: AnalyticsEventPayload): Record<string, string | numbe
   };
 }
 
+function campaignConfig(): Record<string, string> {
+  const current = activeAttribution?.currentTouch ?? {};
+  const config: Record<string, string> = {};
+
+  if (current.utm_source) config.campaign_source = current.utm_source;
+  if (current.utm_medium) config.campaign_medium = current.utm_medium;
+  if (current.utm_campaign) config.campaign_name = current.utm_campaign;
+  if (current.utm_content) config.campaign_content = current.utm_content;
+  if (current.utm_term) config.campaign_term = current.utm_term;
+
+  return config;
+}
+
 function startGoogleAnalytics(): void {
   if (gaStarted || !measurementId || !externalCollectionAllowed()) return;
   gaStarted = true;
@@ -259,7 +274,8 @@ function startGoogleAnalytics(): void {
     allow_google_signals: false,
     allow_ad_personalization_signals: false,
     page_location: `${window.location.origin}${window.location.pathname}`,
-    page_referrer: referrerHost ? `https://${referrerHost}/` : ''
+    page_referrer: referrerHost ? `https://${referrerHost}/` : '',
+    ...campaignConfig()
   });
 
   const script = document.createElement('script');
@@ -292,6 +308,22 @@ function sendToEndpoint(payload: AnalyticsEventPayload): void {
   });
 }
 
+function sendExternal(payload: AnalyticsEventPayload): void {
+  sendToGoogleAnalytics(payload);
+  sendToEndpoint(payload);
+}
+
+function flushPendingExternalEvents(): number {
+  const pending = pendingExternalEvents;
+  pendingExternalEvents = [];
+
+  for (const payload of pending) {
+    sendExternal(payload);
+  }
+
+  return pending.length;
+}
+
 function send(payload: AnalyticsEventPayload): void {
   analyticsWindow.dataLayer = analyticsWindow.dataLayer ?? [];
   analyticsWindow.dataLayer.push({
@@ -311,12 +343,17 @@ function send(payload: AnalyticsEventPayload): void {
     });
   }
 
-  sendToGoogleAnalytics(payload);
-  sendToEndpoint(payload);
+  const consent = readConsent();
+  if (consent === 'granted') {
+    sendExternal(payload);
+  } else if (consent === 'unknown' && pendingExternalEvents.length < 50) {
+    pendingExternalEvents.push(payload);
+  }
 }
 
 export function initAnalytics(): void {
   const attribution = initializeAttribution();
+  activeAttribution = attribution;
   const sessionId = getSessionId();
 
   const track = (eventName: string, properties: AnalyticsProperties = {}) => {
@@ -350,13 +387,15 @@ export function initAnalytics(): void {
       if (consent === 'granted') {
         setGaDisabled(false);
         startGoogleAnalytics();
+        const flushed = flushPendingExternalEvents();
 
-        if (previous !== 'granted') {
+        if (previous !== 'granted' && flushed === 0) {
           track('page_view', { consent_activation: true });
         }
         return;
       }
 
+      pendingExternalEvents = [];
       setGaDisabled(true);
       clearGaCookies();
     },

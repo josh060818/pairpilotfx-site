@@ -87,7 +87,7 @@ Every browser event follows contract version `1.1`:
 }
 ```
 
-The site intentionally records the page path rather than the full page URL and records only the referrer hostname rather than the full referrer URL.
+The site intentionally records the page path rather than the full page URL and records only the referrer hostname rather than the full referrer URL. Sanitized UTM values are also mapped into GA4's `campaign_source`, `campaign_medium`, `campaign_name`, `campaign_content`, and `campaign_term` configuration fields so GA4's built-in acquisition dimensions can report campaign traffic without receiving arbitrary query-string parameters.
 
 For the Trade Preparation Checklist, analytics events do not include the visitor's instrument/scenario label,
 preparation notes, or individual checklist answers. Those values are used only for the browser-local tool state.
