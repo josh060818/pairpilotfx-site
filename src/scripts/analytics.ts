@@ -247,8 +247,8 @@ function startGoogleAnalytics(): void {
   setGaDisabled(false);
 
   analyticsWindow.dataLayer = analyticsWindow.dataLayer ?? [];
-  analyticsWindow.gtag = (...args: unknown[]) => {
-    analyticsWindow.dataLayer!.push(args);
+  analyticsWindow.gtag = function gtag() {
+    analyticsWindow.dataLayer!.push(arguments);
   };
 
   analyticsWindow.gtag('js', new Date());
