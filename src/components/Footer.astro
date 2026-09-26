@@ -1,0 +1,57 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <strong>PairPilotFX</strong>
+      <span>Guiding Better Trading Decisions.</span>
+    </div>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/about/">Methodology</a>
+      <a href="https://pairpilotfx.substack.com/" rel="noopener noreferrer">Substack</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="mailto:pairpilotfx@gmail.com">Contact</a>
+    </nav>
+  </div>
+  <div class="container footer-note">
+    <span>© 2026 PairPilotFX.</span>
+    <span>Educational decision support. Not individualized financial advice.</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    background: rgba(4,12,22,.62);
+  }
+  .footer-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 28px;
+    padding-top: 34px;
+    padding-bottom: 22px;
+  }
+  .footer-brand { display: grid; gap: 5px; }
+  .footer-brand strong { color: white; }
+  .footer-brand span, .footer-note { color: var(--muted); }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px 18px;
+  }
+  .footer-links a { color: #b9c9db; text-decoration: none; font-size: .9rem; }
+  .footer-links a:hover { color: white; }
+  .footer-note {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    padding-top: 20px;
+    padding-bottom: 34px;
+    border-top: 1px solid rgba(255,255,255,.07);
+    font-size: .82rem;
+  }
+  @media (max-width: 680px) {
+    .footer-grid, .footer-note { flex-direction: column; }
+    .footer-links { justify-content: flex-start; }
+  }
+</style>
