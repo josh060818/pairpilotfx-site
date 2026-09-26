@@ -1,0 +1,86 @@
+---
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || (href !== '/' && path.startsWith(href));
+---
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="/" aria-label="PairPilotFX home">
+      <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span>PairPilot<span class="brand-accent">FX</span></span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a class:list={[{ active: isActive('/') }]} href="/">Home</a>
+      <a class:list={[{ active: isActive('/about/') }]} href="/about/">Methodology</a>
+      <a href="https://pairpilotfx.substack.com/subscribe" rel="noopener noreferrer">Weekly Brief</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    background: rgba(6,16,29,.84);
+    backdrop-filter: blur(16px);
+  }
+  .nav {
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-weight: 850;
+    letter-spacing: -.025em;
+    text-decoration: none;
+    font-size: 1.08rem;
+  }
+  .brand-accent { color: var(--accent-strong); }
+  .brand-mark {
+    display: grid;
+    grid-template-columns: repeat(3, 3px);
+    align-items: end;
+    gap: 3px;
+    width: 20px;
+    height: 20px;
+  }
+  .brand-mark span {
+    display: block;
+    border-radius: 2px;
+    background: var(--accent);
+  }
+  .brand-mark span:nth-child(1) { height: 8px; }
+  .brand-mark span:nth-child(2) { height: 17px; }
+  .brand-mark span:nth-child(3) { height: 12px; }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .nav-links a {
+    padding: 8px 11px;
+    border-radius: 999px;
+    color: #aebfd1;
+    text-decoration: none;
+    font-size: .91rem;
+    font-weight: 650;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: white;
+    background: rgba(255,255,255,.06);
+  }
+  @media (max-width: 620px) {
+    .nav { min-height: 62px; }
+    .nav-links a:first-child { display: none; }
+    .nav-links { gap: 2px; }
+    .nav-links a { padding-inline: 8px; font-size: .84rem; }
+  }
+</style>
