@@ -61,8 +61,8 @@ Every browser event follows contract version `1.0`:
   "occurred_at": "ISO-8601 timestamp",
   "session_id": "anonymous session id",
   "page": {
-    "path": "/",
-    "title": "PairPilotFX — Guiding Better Trading Decisions",
+    "path": "/weekly/",
+    "title": "Weekly FX Brief — PairPilotFX",
     "referrer_host": "example.com"
   },
   "attribution": {
