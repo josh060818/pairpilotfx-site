@@ -1,0 +1,75 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+---
+
+<SiteLayout
+  title="Free Trader Tools"
+  description="Free PairPilotFX tools for structured forex preparation and decision support."
+  canonicalPath="/tools/"
+>
+  <section class="tools-hero">
+    <div class="container stack">
+      <div class="pill">Free trader tools</div>
+      <p class="eyebrow">PairPilotFX Tools</p>
+      <h1>Utilities built to improve the preparation process.</h1>
+      <p class="lead">
+        PairPilotFX tools are designed to support disciplined preparation before a trade decision.
+        They do not generate signals or replace your own risk process.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container tools-grid">
+      <article class="card card-pad tool-card">
+        <span class="card-index">01 / AVAILABLE NOW</span>
+        <h2>Trade Preparation Checklist</h2>
+        <p>
+          Work through Context, Strength, Structure, Liquidity, Confirmation, and Risk before treating
+          a scenario as fully prepared.
+        </p>
+        <ul>
+          <li>Locally saved on your device</li>
+          <li>Neutral Incomplete / Waiting / Complete status</li>
+          <li>Explanations for every preparation check</li>
+          <li>No BUY/SELL output</li>
+        </ul>
+        <a
+          class="button"
+          href="/tools/trade-preparation-checklist/"
+          data-analytics-event="free_tool_cta_click"
+          data-analytics-placement="tools_index"
+        >Open the checklist →</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="container disclaimer">
+    <strong>Tool note</strong>
+    <p>
+      These tools are educational decision-support utilities. They do not provide individualized investment
+      advice, trade signals, guaranteed outcomes, or autonomous trade execution.
+    </p>
+  </section>
+</SiteLayout>
+
+<style>
+  .tools-hero { padding: 104px 0 60px; }
+  .tools-hero .stack { gap: 20px; max-width: 880px; }
+  .tools-hero h1 { font-size: clamp(3rem, 7vw, 5.7rem); }
+  .tools-grid { display: grid; grid-template-columns: minmax(0, 760px); }
+  .tool-card { display: grid; gap: 18px; }
+  .tool-card p { color: var(--muted); max-width: 680px; }
+  .tool-card ul { display: grid; gap: 10px; padding-left: 20px; color: #b9cadd; }
+  .tool-card .button { width: fit-content; margin-top: 6px; }
+  .card-index { color: #668199; font-size: .68rem; font-weight: 850; letter-spacing: .13em; }
+  .disclaimer {
+    display: grid; grid-template-columns: auto 1fr; gap: 20px;
+    padding-top: 0; padding-bottom: 72px; color: #7890a8; font-size: .78rem;
+  }
+  .disclaimer strong { color: #9ab1c7; white-space: nowrap; }
+  @media (max-width: 600px) {
+    .tools-hero { padding-top: 76px; }
+    .disclaimer { grid-template-columns: 1fr; gap: 7px; }
+  }
+</style>
