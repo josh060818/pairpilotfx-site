@@ -1,0 +1,243 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Framework from '../components/Framework.astro';
+---
+<SiteLayout
+  title="PairPilotFX"
+  description="Structured forex decision support built around context, relative strength, market structure, liquidity, confirmation, and risk."
+  canonicalPath="/"
+>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="pill"><span class="status-dot"></span> Structured FX Decision Support</div>
+        <p class="eyebrow">PairPilotFX</p>
+        <h1>Guiding Better<br/><span>Trading Decisions.</span></h1>
+        <p class="lead">
+          Filter market noise. Focus on the pairs, levels, and conditions that deserve your attention.
+          PairPilotFX turns market context into a repeatable decision process.
+        </p>
+        <div class="button-row">
+          <a class="button" href="https://pairpilotfx.substack.com/subscribe" rel="noopener noreferrer">
+            Get the Weekly FX Brief <span aria-hidden="true">→</span>
+          </a>
+          <a class="button button-secondary" href="/about/">
+            Explore the methodology
+          </a>
+        </div>
+        <p class="hero-note">Scenario-based research. No signals. No guaranteed outcomes.</p>
+      </div>
+
+      <div class="hero-visual">
+        <div class="brand-banner card">
+          <img
+            src="/brand/pairpilotfx-banner.png"
+            width="820"
+            height="312"
+            alt="PairPilot FX — Guiding Better Trading Decisions"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+
+        <div class="terminal card" aria-label="Illustration of the PairPilotFX filtering process">
+          <div class="terminal-bar">
+            <span>PAIRPILOT / MARKET FILTER</span>
+            <span class="live">FRAMEWORK</span>
+          </div>
+          <div class="scan-row"><span>01</span><strong>CONTEXT</strong><em>macro mapped</em></div>
+          <div class="scan-row"><span>02</span><strong>STRENGTH</strong><em>relative edge</em></div>
+          <div class="scan-row"><span>03</span><strong>STRUCTURE</strong><em>D1 / H4 / H1</em></div>
+          <div class="scan-row"><span>04</span><strong>LIQUIDITY</strong><em>decision area</em></div>
+          <div class="scan-row"><span>05</span><strong>CONFIRMATION</strong><em>condition required</em></div>
+          <div class="scan-row"><span>06</span><strong>RISK</strong><em>invalidation defined</em></div>
+          <div class="terminal-result">
+            <span>PROCESS</span>
+            <strong>FILTER → FOCUS → PREPARE</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container"><div class="rule"></div></div>
+
+  <section class="section-tight">
+    <div class="container trust-grid">
+      <div><strong>Context first</strong><span>Start with the market environment, not a chart pattern.</span></div>
+      <div><strong>Selective by design</strong><span>Not every pair deserves attention every week.</span></div>
+      <div><strong>Confirmation required</strong><span>A scenario is not an entry until its condition is met.</span></div>
+      <div><strong>Risk stays explicit</strong><span>Invalidation belongs in the process from the start.</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="framework">
+    <div class="container stack framework-heading">
+      <p class="eyebrow">The PairPilot framework</p>
+      <h2>A structured path from market noise to a decision.</h2>
+      <p class="lead">
+        PairPilotFX does not begin by asking what to trade. It begins by asking what the evidence supports,
+        what still needs confirmation, and what would invalidate the idea.
+      </p>
+      <Framework />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">What PairPilotFX provides</p>
+          <h2>Research built to improve the preparation process.</h2>
+        </div>
+        <p class="muted">
+          The goal is not more predictions. It is a clearer process for deciding where attention belongs.
+        </p>
+      </div>
+
+      <div class="grid-3 product-grid">
+        <article class="card card-pad">
+          <span class="card-index">01 / WEEKLY</span>
+          <h3>PairPilot Weekly</h3>
+          <p>Macro context, currencies in focus, market structure, event risk, and scenario-based preparation for the week ahead.</p>
+          <a href="https://pairpilotfx.substack.com/" rel="noopener noreferrer">Read on Substack →</a>
+        </article>
+        <article class="card card-pad">
+          <span class="card-index">02 / RECAP</span>
+          <h3>Weekly Market Recap</h3>
+          <p>A structured review of what the market actually did against the scenarios and filters established before the week unfolded.</p>
+          <a href="https://pairpilotfx.substack.com/" rel="noopener noreferrer">Follow the research →</a>
+        </article>
+        <article class="card card-pad">
+          <span class="card-index">03 / RADAR</span>
+          <h3>PairPilot Radar</h3>
+          <p>A developing decision-support system designed to filter a trading universe before deeper chart analysis begins.</p>
+          <a href="/about/#radar">Understand the approach →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container cta card">
+      <div>
+        <p class="eyebrow">Start with the weekly brief</p>
+        <h2>Trade fewer assumptions.<br/>Prepare with more structure.</h2>
+      </div>
+      <div class="cta-side">
+        <p>Get PairPilotFX research and framework-based market preparation in your inbox.</p>
+        <a class="button" href="https://pairpilotfx.substack.com/subscribe" rel="noopener noreferrer">Get the Weekly FX Brief →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container disclaimer">
+    <strong>Risk note</strong>
+    <p>
+      PairPilotFX provides educational market commentary and decision-support content. It does not provide
+      individualized investment advice, guaranteed outcomes, or autonomous trade execution.
+    </p>
+  </section>
+</SiteLayout>
+
+<style>
+  .hero { padding: 108px 0 84px; overflow: hidden; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(380px, .88fr);
+    align-items: center;
+    gap: 58px;
+  }
+  .hero-copy { display: grid; gap: 24px; }
+  .hero-copy .eyebrow { margin: 10px 0 -10px; }
+  .hero h1 span {
+    color: transparent;
+    background: linear-gradient(90deg, #f8fbff, #79bdff 70%);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  .hero-note { color: #7f96ae; font-size: .84rem; }
+  .status-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--success);
+    box-shadow: 0 0 0 5px rgba(101,211,162,.08);
+  }
+  .hero-visual { display: grid; gap: 16px; }
+  .brand-banner { overflow: hidden; background: #fff; box-shadow: var(--shadow); }
+  .brand-banner img { width: 100%; height: auto; }
+  .terminal { overflow: hidden; box-shadow: var(--shadow); }
+  .terminal-bar {
+    display: flex; justify-content: space-between; gap: 16px;
+    padding: 15px 18px; border-bottom: 1px solid var(--border);
+    color: #7f96ae; font-size: .68rem; font-weight: 800; letter-spacing: .11em;
+    background: rgba(255,255,255,.025);
+  }
+  .terminal-bar .live { color: var(--accent-strong); }
+  .scan-row {
+    display: grid;
+    grid-template-columns: 34px 1fr auto;
+    align-items: center;
+    gap: 14px;
+    padding: 17px 20px;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .scan-row span { color: #55708a; font: 700 .72rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .scan-row strong { font: 800 .77rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; }
+  .scan-row em { color: #85a0b9; font: normal .76rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .terminal-result {
+    display: grid; gap: 7px; padding: 24px 20px;
+    background: linear-gradient(90deg, rgba(88,166,255,.07), rgba(88,166,255,.02));
+  }
+  .terminal-result span { color: #668199; font-size: .68rem; font-weight: 800; letter-spacing: .12em; }
+  .terminal-result strong { color: #bfe0ff; font: 800 .91rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .trust-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 28px; }
+  .trust-grid div { display: grid; gap: 7px; }
+  .trust-grid strong { color: white; font-size: .9rem; }
+  .trust-grid span { color: var(--muted); font-size: .82rem; line-height: 1.5; }
+  .framework-heading { gap: 22px; }
+  .framework-heading > .lead { margin-bottom: 24px; }
+  .section-heading {
+    display: grid;
+    grid-template-columns: 1.25fr .75fr;
+    gap: 50px;
+    align-items: end;
+    margin-bottom: 34px;
+  }
+  .section-heading .muted { max-width: 430px; justify-self: end; }
+  .product-grid .card { display: flex; flex-direction: column; gap: 16px; min-height: 280px; }
+  .product-grid p { color: var(--muted); }
+  .product-grid a { margin-top: auto; color: var(--accent-strong); text-decoration: none; font-weight: 750; font-size: .9rem; }
+  .card-index { color: #668199; font-size: .68rem; font-weight: 850; letter-spacing: .13em; }
+  .cta {
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 52px;
+    align-items: center;
+    padding: clamp(30px, 5vw, 58px);
+    border-color: var(--border-strong);
+    background:
+      radial-gradient(circle at 90% 0%, rgba(88,166,255,.15), transparent 28rem),
+      linear-gradient(140deg, rgba(18,38,61,.95), rgba(8,21,37,.95));
+  }
+  .cta-side { display: grid; gap: 20px; color: #bfd0e1; }
+  .cta-side .button { width: fit-content; }
+  .disclaimer {
+    display: grid; grid-template-columns: auto 1fr; gap: 20px;
+    padding-top: 0; padding-bottom: 72px;
+    color: #7890a8; font-size: .78rem;
+  }
+  .disclaimer strong { color: #9ab1c7; white-space: nowrap; }
+  @media (max-width: 900px) {
+    .hero { padding-top: 78px; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .terminal { max-width: 650px; }
+    .trust-grid { grid-template-columns: repeat(2,1fr); }
+    .section-heading, .cta { grid-template-columns: 1fr; }
+    .section-heading .muted { justify-self: start; }
+  }
+  @media (max-width: 520px) {
+    .trust-grid { grid-template-columns: 1fr; }
+    .scan-row { grid-template-columns: 28px 1fr; }
+    .scan-row em { grid-column: 2; }
+    .disclaimer { grid-template-columns: 1fr; gap: 7px; }
+  }
+</style>

@@ -1,0 +1,62 @@
+---
+const stages = [
+  ['01', 'Context', 'Understand the macro environment and the conditions shaping the market.'],
+  ['02', 'Strength', 'Compare currencies and look for meaningful relative-strength separation.'],
+  ['03', 'Structure', 'Read D1, H4, and H1 structure before narrowing the scenario.'],
+  ['04', 'Liquidity', 'Identify the decision areas where price interaction actually matters.'],
+  ['05', 'Confirmation', 'Require the market to satisfy the condition instead of anticipating it.'],
+  ['06', 'Risk', 'Define invalidation and acceptable exposure before acting.']
+];
+---
+<div class="framework" aria-label="PairPilotFX decision framework">
+  {stages.map(([number, name, description], index) => (
+    <article class="framework-step">
+      <div class="step-top">
+        <span class="step-number">{number}</span>
+        {index < stages.length - 1 && <span class="connector" aria-hidden="true">→</span>}
+      </div>
+      <h3>{name}</h3>
+      <p>{description}</p>
+    </article>
+  ))}
+</div>
+
+<style>
+  .framework {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .framework-step {
+    min-height: 214px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(18,38,61,.78), rgba(9,22,38,.88));
+  }
+  .step-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 28px;
+    margin-bottom: 32px;
+  }
+  .step-number {
+    color: var(--accent-strong);
+    font-size: .78rem;
+    font-weight: 850;
+    letter-spacing: .12em;
+  }
+  .connector { color: rgba(124,196,255,.55); }
+  .framework-step h3 { margin-bottom: 10px; }
+  .framework-step p { color: var(--muted); font-size: .9rem; line-height: 1.55; }
+  @media (max-width: 1020px) {
+    .framework { grid-template-columns: repeat(3, 1fr); }
+    .connector { display: none; }
+  }
+  @media (max-width: 620px) {
+    .framework { grid-template-columns: 1fr; }
+    .framework-step { min-height: auto; }
+    .step-top { margin-bottom: 18px; }
+  }
+</style>
