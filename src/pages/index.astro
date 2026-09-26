@@ -18,10 +18,23 @@ import Framework from '../components/Framework.astro';
           PairPilotFX turns market context into a repeatable decision process.
         </p>
         <div class="button-row">
-          <a class="button" href="https://pairpilotfx.substack.com/subscribe" rel="noopener noreferrer">
+          <a
+            class="button"
+            href="https://pairpilotfx.substack.com/subscribe"
+            rel="noopener noreferrer"
+            data-analytics-event="weekly_brief_cta_click"
+            data-analytics-placement="hero"
+            data-analytics-outbound="substack"
+            data-utm-campaign="weekly_brief"
+          >
             Get the Weekly FX Brief <span aria-hidden="true">→</span>
           </a>
-          <a class="button button-secondary" href="/about/">
+          <a
+            class="button button-secondary"
+            href="/about/"
+            data-analytics-event="methodology_cta_click"
+            data-analytics-placement="hero"
+          >
             Explore the methodology
           </a>
         </div>
@@ -100,19 +113,37 @@ import Framework from '../components/Framework.astro';
           <span class="card-index">01 / WEEKLY</span>
           <h3>PairPilot Weekly</h3>
           <p>Macro context, currencies in focus, market structure, event risk, and scenario-based preparation for the week ahead.</p>
-          <a href="https://pairpilotfx.substack.com/" rel="noopener noreferrer">Read on Substack →</a>
+          <a
+            href="https://pairpilotfx.substack.com/"
+            rel="noopener noreferrer"
+            data-analytics-event="substack_click"
+            data-analytics-placement="weekly_product_card"
+            data-analytics-outbound="substack"
+            data-utm-campaign="site_research"
+          >Read on Substack →</a>
         </article>
         <article class="card card-pad">
           <span class="card-index">02 / RECAP</span>
           <h3>Weekly Market Recap</h3>
           <p>A structured review of what the market actually did against the scenarios and filters established before the week unfolded.</p>
-          <a href="https://pairpilotfx.substack.com/" rel="noopener noreferrer">Follow the research →</a>
+          <a
+            href="https://pairpilotfx.substack.com/"
+            rel="noopener noreferrer"
+            data-analytics-event="substack_click"
+            data-analytics-placement="recap_product_card"
+            data-analytics-outbound="substack"
+            data-utm-campaign="site_research"
+          >Follow the research →</a>
         </article>
         <article class="card card-pad">
           <span class="card-index">03 / RADAR</span>
           <h3>PairPilot Radar</h3>
           <p>A developing decision-support system designed to filter a trading universe before deeper chart analysis begins.</p>
-          <a href="/about/#radar">Understand the approach →</a>
+          <a
+            href="/about/#radar"
+            data-analytics-event="radar_cta_click"
+            data-analytics-placement="radar_product_card"
+          >Understand the approach →</a>
         </article>
       </div>
     </div>
@@ -126,7 +157,15 @@ import Framework from '../components/Framework.astro';
       </div>
       <div class="cta-side">
         <p>Get PairPilotFX research and framework-based market preparation in your inbox.</p>
-        <a class="button" href="https://pairpilotfx.substack.com/subscribe" rel="noopener noreferrer">Get the Weekly FX Brief →</a>
+        <a
+          class="button"
+          href="https://pairpilotfx.substack.com/subscribe"
+          rel="noopener noreferrer"
+          data-analytics-event="weekly_brief_cta_click"
+          data-analytics-placement="closing_cta"
+          data-analytics-outbound="substack"
+          data-utm-campaign="weekly_brief"
+        >Get the Weekly FX Brief →</a>
       </div>
     </div>
   </section>
