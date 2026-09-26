@@ -16,14 +16,15 @@ The private PairPilotFX automation/Radar backend remains a separate system and i
 - custom domain: `pairpilotfx.com`
 - Node.js 24 for builds
 
-## Current Phase 6A routes
+## Current Phase 6 routes
 
 - `/` — public homepage
 - `/about/` — PairPilot methodology and Radar overview
+- `/weekly/` — Weekly FX Brief acquisition page
 - `/privacy/` — Privacy Policy
 - `/terms/` — Terms of Service
 
-The Weekly Brief currently routes directly to the existing PairPilotFX Substack. Dedicated `/weekly/`, free-tool, Radar product, and early-access work belong to later Phase 6 increments.
+Phase 6B routes site-level Weekly Brief CTAs through `/weekly/` before the final Substack subscription handoff. Free-tool, dedicated Radar product, and early-access work belong to later Phase 6 increments.
 
 ## Analytics foundation
 
@@ -39,6 +40,16 @@ The Phase 6 analytics foundation is implemented.
 The full UTM/event contract is documented in [docs/analytics.md](docs/analytics.md).
 
 No analytics vendor is hard-coded into the public site. This keeps the foundation portable while the later Phase 6 reporting increment selects the collector/storage layer.
+
+## Phase 6B — Weekly Brief acquisition
+
+The Weekly Brief acquisition layer is implemented.
+
+- `/weekly/` explains the Brief's purpose, structure, and decision framework before asking for a subscription;
+- homepage, methodology, header, and footer Weekly Brief CTAs route to the owned PairPilotFX landing page instead of jumping directly to Substack;
+- final subscription CTAs hand off to the PairPilotFX Substack with preserved campaign attribution;
+- the analytics contract separates landing-page interest from outbound subscription intent through `weekly_brief_cta_click` and `weekly_brief_subscribe_click`;
+- the existing Substack publication remains the subscription and delivery platform.
 
 ## Local development
 
