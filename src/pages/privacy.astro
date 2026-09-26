@@ -90,11 +90,12 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 
     <h2>7. Website analytics and technical data</h2>
     <p>
-      PairPilotFX uses first-party website instrumentation to understand page usage, campaign attribution,
-      and interactions with links such as Weekly Brief, Substack, methodology, and Radar calls to action.
-      The site may store an anonymous browser-session identifier and UTM campaign parameters in
-      <code>sessionStorage</code> for the active browser session. This instrumentation does not use
-      advertising cookies or create a persistent advertising profile.
+      PairPilotFX uses first-party website instrumentation and, when a visitor allows optional analytics,
+      Google Analytics 4 (GA4) to understand page usage, campaign attribution, and interactions with features
+      such as the Weekly Brief, free tools, Radar, and Early Access. The site may store an anonymous
+      browser-session identifier and UTM campaign parameters in <code>sessionStorage</code> for the active
+      browser session. Your analytics preference is stored locally so the site can remember whether optional
+      analytics is allowed.
     </p>
     <p>
       Analytics events are designed to contain only information needed for aggregate funnel measurement,
@@ -103,13 +104,18 @@ import SiteLayout from '../layouts/SiteLayout.astro';
       addresses, form contents, passwords, or full referring URLs in this event payload.
     </p>
     <p>
-      When an analytics collection endpoint is configured, these events may be transmitted to
-      PairPilotFX-controlled or contracted infrastructure for aggregate reporting. Hosting, network,
-      security, or analytics infrastructure may also process technical information such as IP addresses,
-      request timestamps, browser information, or server logs as necessary to deliver and protect the service.
-      PairPilotFX does not use this website analytics instrumentation for personalized advertising.
+      External analytics collection is consent-gated. If you choose “Essential only,” PairPilotFX does not
+      intentionally send its analytics event stream to GA4 or to an optional analytics collection endpoint.
+      If you choose “Allow analytics,” privacy-conscious event data may be transmitted to Google Analytics 4
+      and, if configured, PairPilotFX-controlled or contracted analytics infrastructure for aggregate
+      reporting. PairPilotFX configures GA4 without Google Signals or ad-personalization signals and does not
+      use this website analytics instrumentation for personalized advertising or remarketing. Hosting,
+      network, security, or analytics infrastructure may still process technical information such as IP
+      addresses, request timestamps, browser information, or server logs as necessary to deliver and protect
+      the service.
     </p>
     <p>
+      You can revisit your analytics choice at any time using the “Analytics choices” control in the site footer.
       The PairPilot Trade Preparation Checklist stores its working state locally in the visitor's browser.
       Instrument labels, checklist selections, and preparation notes entered into the tool are not intentionally
       included in PairPilotFX analytics events. Tool analytics may record aggregate interaction metadata such as

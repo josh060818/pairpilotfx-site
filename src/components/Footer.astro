@@ -36,6 +36,7 @@
       >Substack</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
+      <button class="footer-link-button" type="button" data-analytics-consent-settings>Analytics choices</button>
       <a href="mailto:pairpilotfx@gmail.com">Contact</a>
     </nav>
   </div>
@@ -66,8 +67,21 @@
     justify-content: flex-end;
     gap: 10px 18px;
   }
-  .footer-links a { color: #b9c9db; text-decoration: none; font-size: .9rem; }
-  .footer-links a:hover { color: white; }
+  .footer-links a,
+  .footer-link-button {
+    color: #b9c9db;
+    text-decoration: none;
+    font: inherit;
+    font-size: .9rem;
+  }
+  .footer-links a:hover,
+  .footer-link-button:hover { color: white; }
+  .footer-link-button {
+    border: 0;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+  }
   .footer-note {
     display: flex;
     justify-content: space-between;

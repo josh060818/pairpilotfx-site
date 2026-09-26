@@ -1,11 +1,13 @@
-const CONTRACT_VERSION = '1.0';
+const CONTRACT_VERSION = '1.1';
 const SESSION_KEY = 'ppfx.analytics.session.v1';
 const ATTRIBUTION_KEY = 'ppfx.analytics.attribution.v1';
+const CONSENT_KEY = 'ppfx.analytics.consent.v1';
 const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'] as const;
 
 type UtmKey = typeof UTM_KEYS[number];
 type Attribution = Partial<Record<UtmKey, string>>;
 type AnalyticsProperties = Record<string, string | number | boolean | null | undefined>;
+export type AnalyticsConsent = 'granted' | 'denied' | 'unknown';
 
 interface AttributionState {
   firstTouch: Attribution;
@@ -29,20 +31,39 @@ interface AnalyticsEventPayload {
 interface PairPilotAnalyticsApi {
   track: (eventName: string, properties?: AnalyticsProperties) => void;
   getAttribution: () => AttributionState;
+  getConsent: () => AnalyticsConsent;
+  setConsent: (consent: Exclude<AnalyticsConsent, 'unknown'>) => void;
+  externalCollectionConfigured: () => boolean;
 }
 
+type Gtag = (...args: unknown[]) => void;
+
 type AnalyticsWindow = Window & {
-  dataLayer?: Array<Record<string, unknown>>;
+  dataLayer?: Array<Record<string, unknown> | IArguments | unknown[]>;
+  gtag?: Gtag;
   pairpilotfxAnalytics?: PairPilotAnalyticsApi;
 };
 
 const analyticsWindow = window as AnalyticsWindow;
 const endpoint = import.meta.env.PUBLIC_ANALYTICS_ENDPOINT?.trim() ?? '';
+const measurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID?.trim() ?? '';
 const debug = import.meta.env.PUBLIC_ANALYTICS_DEBUG === 'true';
+const consentRequired = import.meta.env.PUBLIC_ANALYTICS_CONSENT_REQUIRED !== 'false';
 
-function storage(): Storage | null {
+let gaStarted = false;
+let activeTrack: ((eventName: string, properties?: AnalyticsProperties) => void) | null = null;
+
+function sessionStorageSafe(): Storage | null {
   try {
     return window.sessionStorage;
+  } catch {
+    return null;
+  }
+}
+
+function localStorageSafe(): Storage | null {
+  try {
+    return window.localStorage;
   } catch {
     return null;
   }
@@ -71,7 +92,7 @@ function hasAttribution(value: Attribution): boolean {
 }
 
 function readStoredAttribution(): AttributionState | null {
-  const store = storage();
+  const store = sessionStorageSafe();
   if (!store) return null;
 
   try {
@@ -88,7 +109,7 @@ function readStoredAttribution(): AttributionState | null {
 }
 
 function initializeAttribution(): AttributionState {
-  const store = storage();
+  const store = sessionStorageSafe();
   const stored = readStoredAttribution();
   const incoming = readIncomingAttribution();
 
@@ -111,7 +132,7 @@ function initializeAttribution(): AttributionState {
 }
 
 function getSessionId(): string {
-  const store = storage();
+  const store = sessionStorageSafe();
 
   try {
     const existing = store?.getItem(SESSION_KEY);
@@ -157,21 +178,105 @@ function destinationFor(anchor: HTMLAnchorElement): string {
   }
 }
 
-function send(payload: AnalyticsEventPayload): void {
+function readConsent(): AnalyticsConsent {
+  if (!consentRequired) return 'granted';
+
+  try {
+    const value = localStorageSafe()?.getItem(CONSENT_KEY);
+    return value === 'granted' || value === 'denied' ? value : 'unknown';
+  } catch {
+    return 'unknown';
+  }
+}
+
+function writeConsent(consent: Exclude<AnalyticsConsent, 'unknown'>): void {
+  try {
+    localStorageSafe()?.setItem(CONSENT_KEY, consent);
+  } catch {
+    // A blocked storage API leaves the choice session-only.
+  }
+}
+
+function externalCollectionAllowed(): boolean {
+  return readConsent() === 'granted';
+}
+
+function setGaDisabled(disabled: boolean): void {
+  if (!measurementId) return;
+  (window as unknown as Record<string, unknown>)[`ga-disable-${measurementId}`] = disabled;
+}
+
+function clearGaCookies(): void {
+  try {
+    const hostname = window.location.hostname;
+    const cookieNames = document.cookie
+      .split(';')
+      .map((entry) => entry.split('=')[0]?.trim())
+      .filter((name): name is string => Boolean(name && name.startsWith('_ga')));
+
+    for (const name of cookieNames) {
+      document.cookie = `${name}=; Max-Age=0; path=/; SameSite=Lax`;
+      document.cookie = `${name}=; Max-Age=0; path=/; domain=${hostname}; SameSite=Lax`;
+      if (hostname.includes('.')) {
+        document.cookie = `${name}=; Max-Age=0; path=/; domain=.${hostname}; SameSite=Lax`;
+      }
+    }
+  } catch {
+    // Cookie cleanup is best-effort and must not affect site behavior.
+  }
+}
+
+function gaParams(payload: AnalyticsEventPayload): Record<string, string | number | boolean | null> {
+  const current = payload.attribution.currentTouch;
+  return {
+    ppfx_contract_version: payload.contract_version,
+    ppfx_page_path: payload.page.path,
+    ppfx_referrer_host: payload.page.referrer_host,
+    ppfx_utm_source: current.utm_source ?? null,
+    ppfx_utm_medium: current.utm_medium ?? null,
+    ppfx_utm_campaign: current.utm_campaign ?? null,
+    ppfx_utm_content: current.utm_content ?? null,
+    ppfx_utm_term: current.utm_term ?? null,
+    ...payload.properties
+  };
+}
+
+function startGoogleAnalytics(): void {
+  if (gaStarted || !measurementId || !externalCollectionAllowed()) return;
+  gaStarted = true;
+  setGaDisabled(false);
+
   analyticsWindow.dataLayer = analyticsWindow.dataLayer ?? [];
-  analyticsWindow.dataLayer.push({
-    event: 'pairpilotfx_event',
-    pairpilotfx_event_name: payload.event_name,
-    pairpilotfx: payload
+  analyticsWindow.gtag = (...args: unknown[]) => {
+    analyticsWindow.dataLayer!.push(args);
+  };
+
+  analyticsWindow.gtag('js', new Date());
+  const referrerHost = getReferrerHost();
+
+  analyticsWindow.gtag('config', measurementId, {
+    send_page_view: false,
+    allow_google_signals: false,
+    allow_ad_personalization_signals: false,
+    page_location: `${window.location.origin}${window.location.pathname}`,
+    page_referrer: referrerHost ? `https://${referrerHost}/` : ''
   });
 
-  window.dispatchEvent(new CustomEvent('pairpilotfx:analytics', { detail: payload }));
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
+  script.dataset.pairpilotAnalytics = 'ga4';
+  document.head.appendChild(script);
+}
 
-  if (debug) {
-    console.debug('[PairPilotFX analytics]', payload);
-  }
+function sendToGoogleAnalytics(payload: AnalyticsEventPayload): void {
+  if (!measurementId || !externalCollectionAllowed()) return;
+  startGoogleAnalytics();
+  analyticsWindow.gtag?.('event', payload.event_name, gaParams(payload));
+}
 
-  if (!endpoint) return;
+function sendToEndpoint(payload: AnalyticsEventPayload): void {
+  if (!endpoint || !externalCollectionAllowed()) return;
 
   void fetch(endpoint, {
     method: 'POST',
@@ -185,6 +290,29 @@ function send(payload: AnalyticsEventPayload): void {
   }).catch(() => {
     // Telemetry failures must remain invisible to visitors.
   });
+}
+
+function send(payload: AnalyticsEventPayload): void {
+  analyticsWindow.dataLayer = analyticsWindow.dataLayer ?? [];
+  analyticsWindow.dataLayer.push({
+    event: 'pairpilotfx_event',
+    pairpilotfx_event_name: payload.event_name,
+    pairpilotfx: payload
+  });
+
+  window.dispatchEvent(new CustomEvent('pairpilotfx:analytics', { detail: payload }));
+
+  if (debug) {
+    console.debug('[PairPilotFX analytics]', {
+      payload,
+      consent: readConsent(),
+      gaConfigured: Boolean(measurementId),
+      endpointConfigured: Boolean(endpoint)
+    });
+  }
+
+  sendToGoogleAnalytics(payload);
+  sendToEndpoint(payload);
 }
 
 export function initAnalytics(): void {
@@ -209,10 +337,35 @@ export function initAnalytics(): void {
     send(payload);
   };
 
+  activeTrack = track;
+
   analyticsWindow.pairpilotfxAnalytics = {
     track,
-    getAttribution: () => attribution
+    getAttribution: () => attribution,
+    getConsent: readConsent,
+    setConsent: (consent) => {
+      const previous = readConsent();
+      writeConsent(consent);
+
+      if (consent === 'granted') {
+        setGaDisabled(false);
+        startGoogleAnalytics();
+
+        if (previous !== 'granted') {
+          track('page_view', { consent_activation: true });
+        }
+        return;
+      }
+
+      setGaDisabled(true);
+      clearGaCookies();
+    },
+    externalCollectionConfigured: () => Boolean(measurementId || endpoint)
   };
+
+  if (externalCollectionAllowed()) {
+    startGoogleAnalytics();
+  }
 
   document.querySelectorAll<HTMLAnchorElement>('a[data-analytics-outbound]').forEach((anchor) => {
     try {
@@ -255,4 +408,8 @@ export function initAnalytics(): void {
   }, { capture: true });
 
   track('page_view');
+}
+
+export function trackAnalytics(eventName: string, properties: AnalyticsProperties = {}): void {
+  activeTrack?.(eventName, properties);
 }

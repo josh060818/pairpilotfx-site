@@ -32,6 +32,11 @@ jobs:
         run: npm install --no-audit --no-fund
 
       - name: Build static site
+        env:
+          PUBLIC_GA_MEASUREMENT_ID: ${{ vars.PUBLIC_GA_MEASUREMENT_ID }}
+          PUBLIC_ANALYTICS_CONSENT_REQUIRED: 'true'
+          PUBLIC_ANALYTICS_ENDPOINT: ${{ vars.PUBLIC_ANALYTICS_ENDPOINT }}
+          PUBLIC_ANALYTICS_DEBUG: 'false'
         run: npm run build
 
       - name: Configure GitHub Pages

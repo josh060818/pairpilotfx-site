@@ -1,6 +1,7 @@
 # PairPilotFX analytics contract
 
 This document defines the public-site attribution and event contract for Original Roadmap Phase 6.
+Phase 6F keeps this contract vendor-neutral while adding consent-gated Google Analytics 4 delivery for reporting.
 
 ## Goals
 
@@ -52,11 +53,11 @@ The placement is appended to inbound `utm_content` when an inbound value exists 
 
 ## Event envelope
 
-Every browser event follows contract version `1.0`:
+Every browser event follows contract version `1.1`:
 
 ```json
 {
-  "contract_version": "1.0",
+  "contract_version": "1.1",
   "event_name": "weekly_brief_subscribe_click",
   "occurred_at": "ISO-8601 timestamp",
   "session_id": "anonymous session id",
@@ -128,18 +129,46 @@ Reserved for later Phase 6 increments:
 
 The client always:
 
-1. pushes the event into `window.dataLayer`;
+1. pushes the PairPilotFX event envelope into `window.dataLayer`;
 2. dispatches a browser `pairpilotfx:analytics` custom event.
 
-If `PUBLIC_ANALYTICS_ENDPOINT` is configured at build time, it also POSTs the JSON event envelope to that collector. With no endpoint configured, the site remains provider-neutral and events stay browser-local/dataLayer-only.
+External collection is consent-gated by default. When a visitor chooses **Allow analytics**:
 
-The analytics endpoint is deliberately optional so a later Phase 6 reporting implementation can select the storage/reporting provider without changing the public event contract.
+- GA4 is loaded if `PUBLIC_GA_MEASUREMENT_ID` is configured;
+- the PairPilotFX event name is sent directly to GA4 with privacy-safe event parameters;
+- the optional `PUBLIC_ANALYTICS_ENDPOINT` receives the same JSON event envelope if it is configured.
+
+When a visitor chooses **Essential only**, the site does not intentionally send the PairPilotFX event stream to
+GA4 or the optional collector. Changing a previous Allow choice to Essential only disables further GA4 sends
+for the page and performs best-effort cleanup of PairPilotFX GA cookies.
+
+GA4 is configured with Google Signals and ad-personalization signals disabled. PairPilotFX does not use this
+instrumentation for personalized advertising or remarketing.
+
+High-cardinality PairPilotFX browser session IDs remain in the browser-local contract and are not intentionally
+sent as GA4 event parameters.
+
+## Phase 6F reporting
+
+Phase 6F uses the same GA4 property for `pairpilotfx.com` and PairPilotFX Substack so the acquisition path can
+be analyzed across the website handoff and completed newsletter subscription.
+
+The detailed reporting model, recommended key events, custom dimensions, funnel explorations, and operational
+checklist are documented in [funnel-reporting.md](funnel-reporting.md).
 
 ## Environment variables
 
 ```text
+PUBLIC_GA_MEASUREMENT_ID=
+PUBLIC_ANALYTICS_CONSENT_REQUIRED=true
 PUBLIC_ANALYTICS_ENDPOINT=
 PUBLIC_ANALYTICS_DEBUG=false
 ```
 
-`PUBLIC_ANALYTICS_DEBUG=true` logs events in the browser console and should be used only for development/validation.
+`PUBLIC_GA_MEASUREMENT_ID` is the GA4 web-stream Measurement ID in `G-...` format. The GitHub Pages workflow
+reads it from the repository Actions variable with the same name.
+
+`PUBLIC_ANALYTICS_CONSENT_REQUIRED=true` is the production privacy default.
+
+`PUBLIC_ANALYTICS_DEBUG=true` logs event/collector state in the browser console and should be used only for
+development or deliberate validation.

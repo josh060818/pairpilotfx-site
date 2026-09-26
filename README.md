@@ -29,22 +29,28 @@ The private PairPilotFX automation/Radar backend remains a separate system and i
 - `/privacy/` — Privacy Policy
 - `/terms/` — Terms of Service
 
-Phase 6B routes site-level Weekly Brief CTAs through `/weekly/` before the final Substack subscription handoff. Phase 6C adds the first free trader tool. Phase 6D adds the dedicated Radar product surface. Phase 6G adds the Radar early-access waitlist while keeping the private automation backend isolated.
+Phase 6B routes site-level Weekly Brief CTAs through `/weekly/` before the final Substack subscription handoff. Phase 6C adds the first free trader tool. Phase 6D adds the dedicated Radar product surface. Phase 6G adds the Radar early-access waitlist while keeping the private automation backend isolated. Phase 6F adds consent-gated funnel reporting without exposing that backend.
 
-## Analytics foundation
+## Analytics foundation and Phase 6F funnel reporting
 
-The Phase 6 analytics foundation is implemented.
+The Phase 6 analytics contract is implemented and Phase 6F adds a consent-gated GA4 reporting layer.
 
 - inbound UTM attribution is captured for the active browser session;
 - first-touch and current-touch campaign values are preserved in `sessionStorage`;
-- page views and acquisition CTA clicks follow a versioned event contract;
+- page views, acquisition CTAs, tool usage, Radar interest, and Early Access events follow a versioned contract;
 - tracked Substack links preserve inbound attribution and add on-site CTA placement;
-- events are pushed to `window.dataLayer` and emitted as `pairpilotfx:analytics` browser events;
-- an optional `PUBLIC_ANALYTICS_ENDPOINT` can receive the same event envelope without changing site instrumentation.
+- events are always available through `window.dataLayer` and the `pairpilotfx:analytics` browser event;
+- GA4 loads only after the visitor chooses **Allow analytics** when a Measurement ID is configured;
+- Google Signals and ad-personalization signals are disabled;
+- the optional `PUBLIC_ANALYTICS_ENDPOINT` remains available for a future separate public collector;
+- the private PairPilotFX automation/Radar backend is not used as the analytics collector.
 
-The full UTM/event contract is documented in [docs/analytics.md](docs/analytics.md).
+The UTM/event contract is documented in [docs/analytics.md](docs/analytics.md).
+The Phase 6F reporting model is documented in [docs/funnel-reporting.md](docs/funnel-reporting.md).
 
-No analytics vendor is hard-coded into the public site. This keeps the foundation portable while the later Phase 6 reporting increment selects the collector/storage layer.
+The production GitHub Pages build reads `PUBLIC_GA_MEASUREMENT_ID` from a repository Actions variable. The same
+GA4 Measurement ID should be configured in PairPilotFX Substack so website acquisition and completed newsletter
+subscriptions can be analyzed in one GA4 property.
 
 ## Phase 6B — Weekly Brief acquisition
 
