@@ -254,6 +254,19 @@ import Framework from '../components/Framework.astro';
   .product-grid p { color: var(--muted); }
   .product-grid a { margin-top: auto; color: var(--accent-strong); text-decoration: none; font-weight: 750; font-size: .9rem; }
   .card-index { color: #668199; font-size: .68rem; font-weight: 850; letter-spacing: .13em; }
+  .free-tool-promo {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: center;
+    margin-top: 20px;
+    padding: clamp(24px, 4vw, 38px);
+    border-color: var(--border-strong);
+    background: linear-gradient(135deg, rgba(88,166,255,.08), rgba(255,255,255,.02));
+  }
+  .free-tool-promo > div { display: grid; gap: 12px; }
+  .free-tool-promo p { color: var(--muted); max-width: 760px; }
+  .free-tool-promo .button { white-space: nowrap; }
   .cta {
     display: grid;
     grid-template-columns: 1.15fr .85fr;
