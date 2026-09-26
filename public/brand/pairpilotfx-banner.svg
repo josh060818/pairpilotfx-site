@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 312" role="img" aria-labelledby="title desc">
+  <title id="title">PairPilot FX</title>
+  <desc id="desc">PairPilot FX — Guiding Better Trading Decisions</desc>
+
+  <rect width="820" height="312" fill="#ffffff"/>
+  <rect x="0" y="0" width="820" height="6" fill="#07172b"/>
+  <rect x="0" y="306" width="820" height="6" fill="#07172b"/>
+
+  <g transform="translate(170 156)">
+    <circle cx="0" cy="0" r="66" fill="none" stroke="#07172b" stroke-width="7"/>
+    <path d="M0 -71v15M0 56v15M-71 0h15M56 0h15" fill="none" stroke="#07172b" stroke-width="4"/>
+    <path d="M-17 18 -10 -10 27 -31 6 4Z" fill="#07172b"/>
+    <path d="M6 4 27 -31 12 12 -17 18Z" fill="#347fd5"/>
+    <circle cx="1" cy="1" r="3.2" fill="#ffffff" stroke="#07172b" stroke-width="2"/>
+  </g>
+
+  <rect x="269" y="89" width="2" height="134" fill="#c8d1dd"/>
+
+  <text x="306" y="156"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="60"
+        font-weight="800"
+        letter-spacing="-1.5"
+        fill="#07172b">PairPilot</text>
+  <text x="596" y="156"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="60"
+        font-weight="800"
+        letter-spacing="-1.5"
+        fill="#347fd5">FX</text>
+
+  <text x="307" y="187"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="20"
+        font-weight="400"
+        letter-spacing=".15"
+        fill="#7a8797">GUIDING BETTER TRADING DECISIONS</text>
+</svg>
