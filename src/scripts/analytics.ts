@@ -201,6 +201,31 @@ function externalCollectionAllowed(): boolean {
   return readConsent() === 'granted';
 }
 
+function setGaDisabled(disabled: boolean): void {
+  if (!measurementId) return;
+  (window as unknown as Record<string, unknown>)[`ga-disable-${measurementId}`] = disabled;
+}
+
+function clearGaCookies(): void {
+  try {
+    const hostname = window.location.hostname;
+    const cookieNames = document.cookie
+      .split(';')
+      .map((entry) => entry.split('=')[0]?.trim())
+      .filter((name): name is string => Boolean(name && name.startsWith('_ga')));
+
+    for (const name of cookieNames) {
+      document.cookie = `${name}=; Max-Age=0; path=/; SameSite=Lax`;
+      document.cookie = `${name}=; Max-Age=0; path=/; domain=${hostname}; SameSite=Lax`;
+      if (hostname.includes('.')) {
+        document.cookie = `${name}=; Max-Age=0; path=/; domain=.${hostname}; SameSite=Lax`;
+      }
+    }
+  } catch {
+    // Cookie cleanup is best-effort and must not affect site behavior.
+  }
+}
+
 function gaParams(payload: AnalyticsEventPayload): Record<string, string | number | boolean | null> {
   const current = payload.attribution.currentTouch;
   return {
@@ -219,6 +244,7 @@ function gaParams(payload: AnalyticsEventPayload): Record<string, string | numbe
 function startGoogleAnalytics(): void {
   if (gaStarted || !measurementId || !externalCollectionAllowed()) return;
   gaStarted = true;
+  setGaDisabled(false);
 
   analyticsWindow.dataLayer = analyticsWindow.dataLayer ?? [];
   analyticsWindow.gtag = (...args: unknown[]) => {
@@ -318,12 +344,17 @@ export function initAnalytics(): void {
       writeConsent(consent);
 
       if (consent === 'granted') {
+        setGaDisabled(false);
         startGoogleAnalytics();
 
         if (previous !== 'granted') {
           track('page_view', { consent_activation: true });
         }
+        return;
       }
+
+      setGaDisabled(true);
+      clearGaCookies();
     },
     externalCollectionConfigured: () => Boolean(measurementId || endpoint)
   };
