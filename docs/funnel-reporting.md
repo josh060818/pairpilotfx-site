@@ -126,7 +126,7 @@ Useful measures:
 - repeat tool visits;
 - Weekly Brief CTA usage after tool interaction.
 
-Checklist scenario labels, preparation notes, and individual answers must never be sent to GA4.
+Checklist scenario labels, preparation notes, and individual answers must never be sent to GA4. Risk Calculator balances, risk percentages, prices, stops, conversion rates, monetary risk, and calculated position sizes must also remain outside GA4.
 
 ### Radar interest
 
@@ -223,9 +223,14 @@ Explore:
 
 Explore:
 
-1. `page_view` where page path is `/tools/trade-preparation-checklist/`;
+Segment by `tool_id` and tool page path:
+
+1. `page_view` on a route under `/tools/`;
 2. `tool_open`;
-3. `tool_complete`.
+3. `tool_complete` where the tool has a meaningful completion state.
+
+The Session Dashboard is intentionally an open/use utility and does not manufacture a completion event. Compare
+return visits and downstream Weekly/Radar CTA activity for it instead.
 
 ### Radar / Early Access funnel
 

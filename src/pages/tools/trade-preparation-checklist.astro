@@ -107,11 +107,11 @@ const groups = [
         <p class="tool-note">Your checklist, instrument label, and notes are saved only in this browser on this device.</p>
       </div>
 
-      <aside class="status-card card" aria-label="Checklist status summary">
+      <aside class="status-card card" aria-label="Checklist status summary" aria-live="polite">
         <span class="status-kicker">PREPARATION STATUS</span>
         <strong data-tool-status class="status-incomplete">Incomplete</strong>
         <p data-tool-status-detail>Review every preparation check before treating this pass as complete.</p>
-        <progress data-tool-progress max="12" value="0">0 of 12 reviewed</progress>
+        <progress data-tool-progress max="12" value="0" aria-label="Checklist review progress">0 of 12 reviewed</progress>
         <div class="status-meta">
           <span data-tool-reviewed>0 of 12 reviewed</span>
           <span data-tool-save-state>No saved checklist</span>
@@ -205,12 +205,26 @@ const groups = [
           PairPilotFX Weekly applies the same decision framework to market context, relative strength,
           structure, liquidity, confirmation, and risk.
         </p>
-        <a
-          class="button"
-          href="/weekly/"
-          data-analytics-event="weekly_brief_cta_click"
-          data-analytics-placement="trade_checklist"
-        >Explore the Weekly FX Brief →</a>
+        <div class="button-row">
+          <a
+            class="button"
+            href="/tools/risk-calculator/"
+            data-analytics-event="free_tool_cta_click"
+            data-analytics-placement="trade_checklist"
+          >Size defined risk →</a>
+          <a
+            class="button button-secondary"
+            href="/weekly/"
+            data-analytics-event="weekly_brief_cta_click"
+            data-analytics-placement="trade_checklist"
+          >Explore Weekly Brief →</a>
+          <a
+            class="button button-secondary"
+            href="/radar/"
+            data-analytics-event="radar_cta_click"
+            data-analytics-placement="trade_checklist"
+          >Explore Radar →</a>
+        </div>
       </div>
     </div>
   </section>

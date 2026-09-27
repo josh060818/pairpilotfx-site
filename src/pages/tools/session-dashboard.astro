@@ -1,0 +1,159 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { SESSION_DEFINITIONS } from '../../lib/tools/marketSessions.mjs';
+---
+
+<SiteLayout
+  title="Forex Session Dashboard"
+  description="See Sydney, Tokyo, London, and New York reference-session status, local market time, DST-safe transitions, and current overlaps."
+  canonicalPath="/tools/session-dashboard/"
+>
+  <div data-session-dashboard>
+    <section class="tool-hero">
+      <div class="container hero-grid">
+        <div class="stack">
+          <div class="pill">Free PairPilotFX tool</div>
+          <p class="eyebrow">Session Dashboard</p>
+          <h1>Know which major market sessions are active.</h1>
+          <p class="lead">Track Sydney, Tokyo, London, and New York reference windows with timezone-aware transitions and overlaps. Session status is context—not a trade signal.</p>
+        </div>
+        <aside class="clock-card card">
+          <div>
+            <span>UTC</span>
+            <strong data-utc-clock>—</strong>
+          </div>
+          <div>
+            <span>YOUR LOCAL TIME</span>
+            <strong data-local-clock>—</strong>
+            <small data-local-zone>Browser timezone</small>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section-tight">
+      <div class="container">
+        <div class="overlap card" aria-live="polite">
+          <div>
+            <span>CURRENT OVERLAP</span>
+            <strong data-overlap>Calculating…</strong>
+          </div>
+          <p data-overlap-detail>Reading timezone-safe market-session windows.</p>
+        </div>
+
+        <div class="sessions-grid">
+          {SESSION_DEFINITIONS.map((session) => (
+            <article class="card session-card" data-session-card={session.id} data-state="closed">
+              <div class="session-heading">
+                <div>
+                  <span class="session-zone">{session.timeZone}</span>
+                  <h2>{session.name}</h2>
+                </div>
+                <strong class="state" data-session-state>CLOSED</strong>
+              </div>
+              <dl>
+                <div><dt>Market local time</dt><dd data-session-local-time>—</dd></div>
+                <div><dt>Reference window</dt><dd>{String(session.openHour).padStart(2, '0')}:00–{String(session.closeHour).padStart(2, '0')}:00</dd></div>
+                <div><dt>Next transition</dt><dd data-session-transition>—</dd></div>
+              </dl>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container context-grid">
+        <article class="card card-pad">
+          <p class="eyebrow">How to use it</p>
+          <h2>Use session status as a liquidity context filter.</h2>
+          <p>PairPilotFX does not infer that an instrument is automatically attractive because a session or overlap is active. Session context tells you <em>when</em> major financial centres are operating; structure, liquidity, confirmation, and risk still determine whether a scenario deserves attention.</p>
+        </article>
+        <article class="card card-pad">
+          <p class="eyebrow">Reference windows</p>
+          <h2>DST-safe by design.</h2>
+          <p>Each session uses its market's IANA timezone rather than a fixed UTC offset. That keeps London, New York, and Sydney transitions aligned through daylight-saving changes while Tokyo remains on Japan Standard Time.</p>
+          <p class="small-note">These are PairPilotFX reference windows for the decentralized FX market, not official exchange opening or closing bells.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-tight">
+      <div class="container next-step card">
+        <div>
+          <p class="eyebrow">Next filter</p>
+          <h2>Timing tells you when. Preparation tells you whether.</h2>
+        </div>
+        <div>
+          <p>Continue through Context → Strength → Structure → Liquidity → Confirmation → Risk before considering execution.</p>
+          <div class="button-row">
+            <a class="button button-secondary" href="/tools/trade-preparation-checklist/" data-analytics-event="free_tool_cta_click" data-analytics-placement="session_dashboard">Open checklist →</a>
+            <a class="button button-secondary" href="/weekly/" data-analytics-event="weekly_brief_cta_click" data-analytics-placement="session_dashboard">Explore Weekly Brief →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container disclaimer">
+      <strong>Session note</strong>
+      <p>Market participation varies by instrument, venue, holiday, event risk, and trading conditions. An active session or overlap does not imply a specific level of liquidity or provide a BUY/SELL signal.</p>
+    </section>
+  </div>
+
+  <script>
+    import '../../scripts/sessionDashboard';
+  </script>
+</SiteLayout>
+
+<style>
+  .tool-hero { padding: 102px 0 68px; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(300px, .72fr); gap: 54px; align-items: center; }
+  .hero-grid h1 { font-size: clamp(3rem, 6.6vw, 5.7rem); }
+  .clock-card { padding: 28px; display: grid; gap: 22px; border-color: var(--border-strong); }
+  .clock-card > div { display: grid; gap: 5px; }
+  .clock-card span, .overlap span { color: #668199; font-size: .67rem; font-weight: 850; letter-spacing: .13em; }
+  .clock-card strong { color: #edf6ff; font: 800 clamp(1.5rem, 4vw, 2.4rem)/1.1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .clock-card small { color: var(--muted); }
+
+  .overlap { padding: 24px 28px; display: flex; justify-content: space-between; gap: 28px; align-items: center; margin-bottom: 24px; border-color: var(--border-strong); }
+  .overlap > div { display: grid; gap: 7px; }
+  .overlap strong { color: #e9f4ff; font-size: clamp(1.35rem, 3vw, 2rem); }
+  .overlap p { color: var(--muted); max-width: 520px; text-align: right; }
+
+  .sessions-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 20px; }
+  .session-card { padding: 26px; display: grid; gap: 24px; transition: border-color .2s ease, background .2s ease; }
+  .session-card[data-state="open"] { border-color: rgba(101,211,162,.4); background: linear-gradient(180deg, rgba(27,58,58,.78), rgba(11,30,38,.85)); }
+  .session-heading { display: flex; justify-content: space-between; gap: 20px; align-items: start; }
+  .session-heading > div { display: grid; gap: 7px; }
+  .session-zone { color: #668199; font-size: .68rem; }
+  .session-heading h2 { font-size: 2rem; }
+  .state { border: 1px solid var(--border-strong); border-radius: 999px; padding: 7px 10px; color: #9eb1c3; font-size: .72rem; letter-spacing: .09em; }
+  .session-card[data-state="open"] .state { color: #bdf1da; border-color: rgba(101,211,162,.45); background: rgba(101,211,162,.08); }
+  dl { display: grid; margin: 0; }
+  dl > div { display: flex; justify-content: space-between; gap: 18px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+  dl > div:last-child { border-bottom: 0; }
+  dt { color: var(--muted); }
+  dd { margin: 0; color: #edf6ff; font-weight: 750; text-align: right; }
+
+  .context-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 24px; }
+  .context-grid article { display: grid; gap: 18px; }
+  .context-grid p { color: var(--muted); }
+  .small-note { font-size: .82rem; color: #7f96ae !important; }
+  .next-step { display: grid; grid-template-columns: 1fr .9fr; gap: 44px; align-items: center; padding: clamp(30px, 5vw, 52px); border-color: var(--border-strong); }
+  .next-step > div { display: grid; gap: 16px; }
+  .next-step p { color: var(--muted); }
+  .disclaimer { display: grid; grid-template-columns: auto 1fr; gap: 20px; padding-top: 0; padding-bottom: 72px; color: #7890a8; font-size: .78rem; }
+  .disclaimer strong { color: #9ab1c7; white-space: nowrap; }
+
+  @media (max-width: 880px) {
+    .hero-grid, .context-grid, .next-step { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .tool-hero { padding-top: 76px; }
+    .sessions-grid { grid-template-columns: 1fr; }
+    .overlap { align-items: start; flex-direction: column; }
+    .overlap p { text-align: left; }
+    .session-heading, dl > div { align-items: start; }
+    .disclaimer { grid-template-columns: 1fr; gap: 7px; }
+  }
+</style>

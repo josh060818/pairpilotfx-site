@@ -89,8 +89,12 @@ Every browser event follows contract version `1.1`:
 
 The site intentionally records the page path rather than the full page URL and records only the referrer hostname rather than the full referrer URL. Sanitized UTM values are also mapped into GA4's `campaign_source`, `campaign_medium`, `campaign_name`, `campaign_content`, and `campaign_term` configuration fields so GA4's built-in acquisition dimensions can report campaign traffic without receiving arbitrary query-string parameters.
 
-For the Trade Preparation Checklist, analytics events do not include the visitor's instrument/scenario label,
-preparation notes, or individual checklist answers. Those values are used only for the browser-local tool state.
+For the free trader tools, analytics deliberately avoid sensitive trading inputs. Trade Preparation Checklist
+events do not include instrument/scenario labels, preparation notes, or individual answers. Risk Calculator
+events do not include account balance, risk percentage, monetary risk, entry price, stop price, manual conversion
+rate, or calculated position size. Session Dashboard events do not include precise location data. Tool events use
+coarse metadata such as the tool identifier, instrument class, or conversion mode only when needed for aggregate
+product analysis.
 
 For Radar early access, analytics events do not include email address, first name, pair selections, or free-text
 waitlist answers. The successful `early_access_signup` event records only coarse interaction metadata such as
@@ -110,9 +114,9 @@ Implemented now:
 | `radar_cta_click` | CTA that routes a visitor to the dedicated PairPilot Radar product page |
 | `methodology_cta_click` | homepage methodology CTA |
 | `free_tool_cta_click` | CTA that routes a visitor to a free PairPilotFX tool |
-| `tool_open` | Trade Preparation Checklist loaded in the browser |
-| `tool_complete` | all checklist conditions transition to Confirmed during the active visit |
-| `tool_reset` | visitor resets the locally saved checklist |
+| `tool_open` | a free PairPilotFX tool loads in the browser; `tool_id` distinguishes the tool |
+| `tool_complete` | a completion condition occurs, such as all checklist conditions Confirmed or a valid risk calculation |
+| `tool_reset` | a resettable free tool is cleared by the visitor |
 | `early_access_cta_click` | CTA that routes a visitor to the Radar early-access waitlist |
 | `early_access_view` | Radar early-access waitlist page loaded |
 | `early_access_signup` | waitlist provider accepted a Radar early-access submission |
