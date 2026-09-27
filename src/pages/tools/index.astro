@@ -3,71 +3,126 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 ---
 
 <SiteLayout
-  title="Free Trader Tools"
-  description="Free PairPilotFX tools for structured forex preparation and decision support."
+  title="Free Forex Trader Tools"
+  description="Free PairPilotFX tools for forex session context, trade preparation, and risk-first position sizing."
   canonicalPath="/tools/"
 >
   <section class="tools-hero">
     <div class="container stack">
       <div class="pill">Free trader tools</div>
       <p class="eyebrow">PairPilotFX Tools</p>
-      <h1>Utilities built to improve the preparation process.</h1>
+      <h1>Useful before the trade decision.</h1>
       <p class="lead">
-        PairPilotFX tools are designed to support disciplined preparation before a trade decision.
-        They do not generate signals or replace your own risk process.
+        Three browser-based utilities reinforce the PairPilotFX process without accounts, signals, or broker connections:
+        understand when major sessions are active, review whether the scenario is prepared, then size risk deliberately.
       </p>
     </div>
   </section>
 
   <section class="section-tight">
+    <div class="container workflow" aria-label="PairPilotFX free-tool workflow">
+      <span>WHEN?</span><strong>Session Dashboard</strong>
+      <i>→</i>
+      <span>SHOULD I CONSIDER IT?</span><strong>Trading Checklist</strong>
+      <i>→</i>
+      <span>HOW MUCH RISK?</span><strong>Risk Calculator</strong>
+    </div>
+  </section>
+
+  <section class="section-tight tools-section">
     <div class="container tools-grid">
       <article class="card card-pad tool-card">
-        <span class="card-index">01 / AVAILABLE NOW</span>
+        <span class="card-index">01 / AVAILABLE</span>
+        <h2>Session Dashboard</h2>
+        <p>See Sydney, Tokyo, London, and New York reference-session status, local market time, next transitions, and active overlaps.</p>
+        <ul>
+          <li>DST-safe named timezones</li>
+          <li>UTC and browser-local clocks</li>
+          <li>No fabricated liquidity or pair recommendation</li>
+        </ul>
+        <a class="button" href="/tools/session-dashboard/" data-analytics-event="free_tool_cta_click" data-analytics-placement="tools_index_session">Open Session Dashboard →</a>
+      </article>
+
+      <article class="card card-pad tool-card">
+        <span class="card-index">02 / AVAILABLE</span>
         <h2>Trade Preparation Checklist</h2>
-        <p>
-          Work through Context, Strength, Structure, Liquidity, Confirmation, and Risk before treating
-          a scenario as fully prepared.
-        </p>
+        <p>Work through Context, Strength, Structure, Liquidity, Confirmation, and Risk before treating a scenario as fully prepared.</p>
         <ul>
           <li>Locally saved on your device</li>
           <li>Neutral Incomplete / Waiting / Complete status</li>
-          <li>Explanations for every preparation check</li>
           <li>No BUY/SELL output</li>
         </ul>
-        <a
-          class="button"
-          href="/tools/trade-preparation-checklist/"
-          data-analytics-event="free_tool_cta_click"
-          data-analytics-placement="tools_index"
-        >Open the checklist →</a>
+        <a class="button" href="/tools/trade-preparation-checklist/" data-analytics-event="free_tool_cta_click" data-analytics-placement="tools_index_checklist">Open the checklist →</a>
       </article>
+
+      <article class="card card-pad tool-card">
+        <span class="card-index">03 / AVAILABLE</span>
+        <h2>Risk Calculator</h2>
+        <p>Calculate position size from account balance, defined risk, stop distance, instrument specification, and explicit currency conversion.</p>
+        <ul>
+          <li>FX and XAU/USD support</li>
+          <li>Transparent conversion assumptions</li>
+          <li>Inputs processed only in the browser</li>
+        </ul>
+        <a class="button" href="/tools/risk-calculator/" data-analytics-event="free_tool_cta_click" data-analytics-placement="tools_index_risk">Open Risk Calculator →</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container funnel card">
+      <div>
+        <p class="eyebrow">Beyond the utility</p>
+        <h2>Apply the same framework to the wider market.</h2>
+      </div>
+      <div>
+        <p>PairPilot Weekly provides macro and event context. PairPilot Radar is being developed as the market-selection layer around the same decision framework.</p>
+        <div class="button-row">
+          <a class="button button-secondary" href="/weekly/" data-analytics-event="weekly_brief_cta_click" data-analytics-placement="tools_hub">Explore Weekly Brief →</a>
+          <a class="button button-secondary" href="/radar/" data-analytics-event="radar_cta_click" data-analytics-placement="tools_hub">Explore Radar →</a>
+        </div>
+      </div>
     </div>
   </section>
 
   <section class="container disclaimer">
     <strong>Tool note</strong>
-    <p>
-      These tools are educational decision-support utilities. They do not provide individualized investment
-      advice, trade signals, guaranteed outcomes, or autonomous trade execution.
-    </p>
+    <p>These tools are educational decision-support utilities. They do not provide individualized investment advice, trade signals, guaranteed outcomes, or autonomous trade execution.</p>
   </section>
 </SiteLayout>
 
 <style>
   .tools-hero { padding: 104px 0 60px; }
-  .tools-hero .stack { gap: 20px; max-width: 880px; }
+  .tools-hero .stack { gap: 20px; max-width: 900px; }
   .tools-hero h1 { font-size: clamp(3rem, 7vw, 5.7rem); }
-  .tools-grid { display: grid; grid-template-columns: minmax(0, 760px); }
-  .tool-card { display: grid; gap: 18px; }
-  .tool-card p { color: var(--muted); max-width: 680px; }
-  .tool-card ul { display: grid; gap: 10px; padding-left: 20px; color: #b9cadd; }
-  .tool-card .button { width: fit-content; margin-top: 6px; }
-  .card-index { color: #668199; font-size: .68rem; font-weight: 850; letter-spacing: .13em; }
-  .disclaimer {
-    display: grid; grid-template-columns: auto 1fr; gap: 20px;
-    padding-top: 0; padding-bottom: 72px; color: #7890a8; font-size: .78rem;
+  .workflow {
+    display: grid;
+    grid-template-columns: auto minmax(0,1fr) auto auto minmax(0,1fr) auto auto minmax(0,1fr);
+    align-items: center; gap: 12px;
+    padding: 18px 22px; border: 1px solid var(--border); border-radius: var(--radius);
+    background: rgba(88,166,255,.035);
   }
+  .workflow span { color: #668199; font-size: .65rem; font-weight: 850; letter-spacing: .11em; }
+  .workflow strong { color: #dcecff; }
+  .workflow i { color: var(--accent-strong); font-style: normal; }
+  .tools-section { padding-top: 28px; }
+  .tools-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px; }
+  .tool-card { display: grid; gap: 18px; align-content: start; }
+  .tool-card p { color: var(--muted); }
+  .tool-card ul { display: grid; gap: 9px; padding-left: 20px; color: #b9cadd; }
+  .tool-card .button { width: fit-content; margin-top: auto; }
+  .card-index { color: #668199; font-size: .68rem; font-weight: 850; letter-spacing: .13em; }
+  .funnel { display: grid; grid-template-columns: 1fr .9fr; gap: 48px; align-items: center; padding: clamp(30px, 5vw, 54px); border-color: var(--border-strong); }
+  .funnel > div { display: grid; gap: 17px; }
+  .funnel p { color: var(--muted); }
+  .disclaimer { display: grid; grid-template-columns: auto 1fr; gap: 20px; padding-top: 0; padding-bottom: 72px; color: #7890a8; font-size: .78rem; }
   .disclaimer strong { color: #9ab1c7; white-space: nowrap; }
+  @media (max-width: 980px) {
+    .tools-grid { grid-template-columns: 1fr; }
+    .workflow { grid-template-columns: 1fr; gap: 4px; }
+    .workflow i { transform: rotate(90deg); width: fit-content; margin: 4px 0; }
+    .funnel { grid-template-columns: 1fr; }
+  }
   @media (max-width: 600px) {
     .tools-hero { padding-top: 76px; }
     .disclaimer { grid-template-columns: 1fr; gap: 7px; }
