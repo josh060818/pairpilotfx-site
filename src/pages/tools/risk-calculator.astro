@@ -1,0 +1,221 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { ACCOUNT_CURRENCIES, INSTRUMENTS } from '../../lib/tools/riskCalculation.mjs';
+---
+
+<SiteLayout
+  title="Forex Risk & Position Size Calculator"
+  description="Calculate forex or XAU/USD position size from account balance, defined risk, and stop distance with transparent currency-conversion assumptions."
+  canonicalPath="/tools/risk-calculator/"
+>
+  <section class="tool-hero">
+    <div class="container hero-grid">
+      <div class="stack">
+        <div class="pill">Free PairPilotFX tool</div>
+        <p class="eyebrow">Risk Calculator</p>
+        <h1>Size the position from the risk—not the other way around.</h1>
+        <p class="lead">
+          Define account risk and stop distance first. PairPilotFX then calculates the corresponding position size using explicit instrument and currency-conversion assumptions.
+        </p>
+      </div>
+      <aside class="principle card card-pad">
+        <span>RISK-FIRST FLOW</span>
+        <strong>Account → Risk % → Stop → Instrument → Size</strong>
+        <p>This calculator performs arithmetic. It does not recommend whether a trade should be taken.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container calculator-grid">
+      <form class="card calculator" data-risk-calculator novalidate>
+        <div class="form-heading">
+          <div>
+            <p class="eyebrow">Define the risk</p>
+            <h2>Position size at defined risk</h2>
+          </div>
+          <p>Values stay in this browser. PairPilotFX analytics do not receive balances, risk amounts, prices, stops, conversion rates, or calculated size.</p>
+        </div>
+
+        <div class="error-summary" data-error-summary tabindex="-1" role="alert" hidden></div>
+        <div class="warning-summary" data-warning-summary role="status" hidden></div>
+
+        <div class="fields">
+          <label>
+            <span>Account balance</span>
+            <input name="accountBalance" type="number" min="0" step="any" inputmode="decimal" autocomplete="off" placeholder="10000" aria-describedby="balance-error" />
+            <small id="balance-error" data-field-error="accountBalance" hidden></small>
+          </label>
+
+          <label>
+            <span>Account currency</span>
+            <select name="accountCurrency" aria-describedby="account-currency-error">
+              {ACCOUNT_CURRENCIES.map((currency) => <option value={currency} selected={currency === 'USD'}>{currency}</option>)}
+            </select>
+            <small id="account-currency-error" data-field-error="accountCurrency" hidden></small>
+          </label>
+
+          <label>
+            <span>Risk %</span>
+            <input name="riskPercent" type="number" min="0" max="100" step="any" inputmode="decimal" autocomplete="off" placeholder="1" aria-describedby="risk-error" />
+            <small id="risk-error" data-field-error="riskPercent" hidden></small>
+          </label>
+
+          <label>
+            <span>Instrument</span>
+            <select name="instrumentId" aria-describedby="instrument-error">
+              {INSTRUMENTS.map((item) => <option value={item.id} selected={item.id === 'AUDUSD'}>{item.label}</option>)}
+            </select>
+            <small id="instrument-error" data-field-error="instrumentId" hidden></small>
+          </label>
+
+          <label>
+            <span>Entry price</span>
+            <input name="entryPrice" type="number" min="0" step="any" inputmode="decimal" autocomplete="off" placeholder="0.6500" aria-describedby="entry-error" />
+            <small id="entry-error" data-field-error="entryPrice" hidden></small>
+          </label>
+
+          <label>
+            <span>Stop-loss price</span>
+            <input name="stopPrice" type="number" min="0" step="any" inputmode="decimal" autocomplete="off" placeholder="0.6450" aria-describedby="stop-error" />
+            <small id="stop-error" data-field-error="stopPrice" hidden></small>
+          </label>
+
+          <label class="conversion-field" data-conversion-field hidden>
+            <span>Currency conversion</span>
+            <span class="conversion-input">
+              <span data-conversion-label>1 CAD =</span>
+              <input name="manualConversionRate" type="number" min="0" step="any" inputmode="decimal" autocomplete="off" aria-describedby="conversion-help conversion-error" />
+              <span data-conversion-suffix>USD</span>
+            </span>
+            <small id="conversion-help" class="field-help" data-conversion-help></small>
+            <small id="conversion-error" data-field-error="manualConversionRate" hidden></small>
+          </label>
+        </div>
+
+        <div class="actions">
+          <button class="button" type="submit">Calculate position size</button>
+          <button class="button button-secondary" type="button" data-risk-reset>Reset</button>
+        </div>
+      </form>
+
+      <aside class="card results" data-risk-result tabindex="-1" aria-live="polite" hidden>
+        <div class="result-heading">
+          <span>CALCULATED RESULT</span>
+          <h2>Position size at defined risk</h2>
+        </div>
+        <dl>
+          <div><dt>Amount at risk</dt><dd data-result-risk>—</dd></div>
+          <div><dt>Price stop distance</dt><dd data-result-stop>—</dd></div>
+          <div data-result-fx><dt>Stop distance</dt><dd><span data-result-pips>—</span> pips</dd></div>
+          <div data-result-fx><dt>Position units</dt><dd data-result-units>—</dd></div>
+          <div><dt>Standard lots</dt><dd data-result-lots>—</dd></div>
+          <div data-result-fx><dt>Mini-lot equivalent</dt><dd data-result-mini>—</dd></div>
+          <div data-result-fx><dt>Micro-lot equivalent</dt><dd data-result-micro>—</dd></div>
+          <div data-result-fx><dt>Pip value / standard lot</dt><dd data-result-pip-value>—</dd></div>
+          <div data-result-metal hidden><dt>Approximate ounces</dt><dd data-result-ounces>—</dd></div>
+          <div data-result-metal hidden><dt>XAU/USD contract assumption</dt><dd data-result-contract>—</dd></div>
+        </dl>
+        <p class="conversion-note" data-result-conversion></p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container assumptions-grid">
+      <article class="card card-pad">
+        <p class="eyebrow">Transparent assumptions</p>
+        <h2>Know what the calculator is doing.</h2>
+        <ul>
+          <li>Spot FX uses 100,000 base-currency units per standard lot.</li>
+          <li>JPY pairs use a 0.01 pip; other supported FX pairs use 0.0001.</li>
+          <li>If the account currency matches the FX base currency, conversion is derived at the stop price.</li>
+          <li>If account currency is neither base nor quote, you provide the quote → account conversion rate.</li>
+          <li>XAU/USD uses a 100 troy-ounce standard-lot assumption. Verify your broker's specification before relying on the result.</li>
+        </ul>
+      </article>
+      <article class="card card-pad next-tool">
+        <p class="eyebrow">PairPilot workflow</p>
+        <h2>Risk comes after preparation.</h2>
+        <p>Use the Trading Checklist to define Context, Strength, Structure, Liquidity, Confirmation, and invalidation before sizing a position.</p>
+        <div class="button-row">
+          <a class="button button-secondary" href="/tools/trade-preparation-checklist/" data-analytics-event="free_tool_cta_click" data-analytics-placement="risk_calculator">Open checklist →</a>
+          <a class="button button-secondary" href="/weekly/" data-analytics-event="weekly_brief_cta_click" data-analytics-placement="risk_calculator">Explore Weekly Brief →</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="container disclaimer">
+    <strong>Risk note</strong>
+    <p>This tool is educational arithmetic, not individualized investment advice or a trade recommendation. Broker contract sizes, execution, spreads, commissions, currency conversion, and margin rules can differ. Verify the relevant broker specification before execution.</p>
+  </section>
+
+  <script>
+    import '../../scripts/riskCalculator';
+  </script>
+</SiteLayout>
+
+<style>
+  .tool-hero { padding: 102px 0 68px; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(300px, .72fr); gap: 54px; align-items: center; }
+  .hero-grid h1 { font-size: clamp(3rem, 6.6vw, 5.7rem); }
+  .principle { display: grid; gap: 14px; border-color: var(--border-strong); }
+  .principle span, .result-heading span { color: #668199; font-size: .67rem; font-weight: 850; letter-spacing: .13em; }
+  .principle strong { color: #eaf4ff; font-size: 1.35rem; line-height: 1.35; }
+  .principle p { color: var(--muted); }
+
+  .calculator-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr); gap: 24px; align-items: start; }
+  .calculator { padding: clamp(24px, 4vw, 38px); display: grid; gap: 28px; }
+  .form-heading { display: grid; grid-template-columns: 1fr .85fr; gap: 24px; align-items: end; }
+  .form-heading h2 { font-size: clamp(1.8rem, 3vw, 2.8rem); }
+  .form-heading > p { color: var(--muted); font-size: .83rem; }
+  .fields { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+  label { display: grid; gap: 8px; color: #a8bbce; font-size: .82rem; font-weight: 700; }
+  input, select {
+    width: 100%; min-height: 46px; border: 1px solid var(--border); border-radius: 10px;
+    background: rgba(4,13,23,.72); color: #edf6ff; padding: 10px 12px; outline: none;
+  }
+  input:focus, select:focus { border-color: var(--accent-strong); box-shadow: 0 0 0 3px rgba(88,166,255,.08); }
+  input[aria-invalid="true"], select[aria-invalid="true"] { border-color: #e58a8a; }
+  label small[data-field-error] { color: #f0aaaa; font-weight: 600; }
+  .field-help { color: #7890a8; font-weight: 500; line-height: 1.45; }
+  .conversion-field { grid-column: 1 / -1; }
+  .conversion-input { display: grid; grid-template-columns: auto minmax(140px, 1fr) auto; gap: 10px; align-items: center; }
+  .conversion-input > span { color: #c0d0df; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  button.button { cursor: pointer; }
+
+  .error-summary, .warning-summary { border-radius: 10px; padding: 14px 16px; }
+  .error-summary { border: 1px solid rgba(229,138,138,.35); background: rgba(229,138,138,.08); color: #ffd0d0; }
+  .error-summary ul { margin: 8px 0 0; padding-left: 20px; }
+  .warning-summary { border: 1px solid rgba(243,203,120,.35); background: rgba(243,203,120,.08); color: #ffe0a3; }
+
+  .results { padding: 28px; display: grid; gap: 22px; border-color: var(--border-strong); position: sticky; top: 94px; }
+  .result-heading { display: grid; gap: 8px; }
+  .result-heading h2 { font-size: 1.7rem; }
+  dl { display: grid; margin: 0; }
+  dl > div { display: flex; justify-content: space-between; gap: 18px; padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+  dt { color: var(--muted); }
+  dd { margin: 0; color: #f1f8ff; font-weight: 800; text-align: right; }
+  .conversion-note { color: #8fa6bc; font-size: .8rem; line-height: 1.55; }
+
+  .assumptions-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 24px; }
+  .assumptions-grid article { display: grid; gap: 18px; }
+  .assumptions-grid ul { margin: 0; padding-left: 20px; display: grid; gap: 10px; color: var(--muted); }
+  .next-tool p { color: var(--muted); }
+  .disclaimer { display: grid; grid-template-columns: auto 1fr; gap: 20px; padding-top: 0; padding-bottom: 72px; color: #7890a8; font-size: .78rem; }
+  .disclaimer strong { color: #9ab1c7; white-space: nowrap; }
+
+  @media (max-width: 920px) {
+    .hero-grid, .calculator-grid, .assumptions-grid { grid-template-columns: 1fr; }
+    .results { position: static; }
+  }
+  @media (max-width: 680px) {
+    .tool-hero { padding-top: 76px; }
+    .form-heading, .fields { grid-template-columns: 1fr; }
+    .conversion-field { grid-column: auto; }
+    .conversion-input { grid-template-columns: 1fr; }
+    .disclaimer { grid-template-columns: 1fr; gap: 7px; }
+  }
+</style>
