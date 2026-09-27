@@ -179,3 +179,35 @@ test('rejects a missing manual conversion and warns for unusually high but valid
   assert.equal(high.ok, true);
   assert.equal(high.warnings.length, 1);
 });
+
+test('preserves fractional risk precision without premature rounding', () => {
+  const result = calculateRiskPosition({
+    accountBalance: 12345.67,
+    riskPercent: 0.75,
+    accountCurrency: 'USD',
+    instrumentId: 'NZDUSD',
+    entryPrice: 0.61234,
+    stopPrice: 0.60987
+  });
+
+  assert.equal(result.ok, true);
+  closeTo(result.riskAmount, 92.592525, 1e-9);
+  closeTo(result.stopDistance, 0.00247, 1e-12);
+  closeTo(result.units, 92.592525 / 0.00247, 1e-6);
+});
+
+test('rejects zero or negative manual conversion rates', () => {
+  for (const manualConversionRate of [0, -0.5]) {
+    const result = calculateRiskPosition({
+      accountBalance: 10000,
+      riskPercent: 1,
+      accountCurrency: 'USD',
+      instrumentId: 'AUDCAD',
+      entryPrice: 0.9,
+      stopPrice: 0.895,
+      manualConversionRate
+    });
+    assert.equal(result.ok, false);
+    assert.ok(result.errors.manualConversionRate);
+  }
+});
