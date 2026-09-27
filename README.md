@@ -4,7 +4,7 @@ Public acquisition website for **PairPilotFX — Guiding Better Trading Decision
 
 ## Product phase
 
-This repository owns the public website for **Original Roadmap Phase 6 — Audience Funnel**.
+This repository owns the public website for **Original Roadmap Phase 6 — Audience Funnel** and the public utilities for **Original Product Roadmap Phase 5 — Free Trader Tools**.
 
 The private PairPilotFX automation/Radar backend remains a separate system and is not exposed by this site.
 
@@ -22,7 +22,9 @@ The private PairPilotFX automation/Radar backend remains a separate system and i
 - `/about/` — PairPilot methodology and Radar overview
 - `/weekly/` — Weekly FX Brief acquisition page
 - `/tools/` — free trader tools landing page
+- `/tools/session-dashboard/` — timezone-safe Sydney/Tokyo/London/New York session dashboard
 - `/tools/trade-preparation-checklist/` — interactive PairPilot Trade Preparation Checklist
+- `/tools/risk-calculator/` — deterministic FX/XAUUSD risk and position-size calculator
 - `/radar/` — PairPilot Radar product page
 - `/early-access/` — Radar early-access waitlist
 - `/early-access/thanks/` — non-JavaScript waitlist confirmation fallback
@@ -30,6 +32,16 @@ The private PairPilotFX automation/Radar backend remains a separate system and i
 - `/terms/` — Terms of Service
 
 Phase 6B routes site-level Weekly Brief CTAs through `/weekly/` before the final Substack subscription handoff. Phase 6C adds the first free trader tool. Phase 6D adds the dedicated Radar product surface. Phase 6G adds the Radar early-access waitlist while keeping the private automation backend isolated. Phase 6F adds consent-gated funnel reporting without exposing that backend.
+
+## Product Phase 5 — Free Trader Tools
+
+The Product Phase 5 utility suite is implemented on the static public site and remains independent from the private PairPilotFX automation/Radar backend.
+
+- **Session Dashboard** uses IANA timezones for Sydney, Tokyo, London, and New York reference windows and handles DST without fixed UTC offsets.
+- **Trade Preparation Checklist** preserves the existing browser-local Context → Strength → Structure → Liquidity → Confirmation → Risk workflow.
+- **Risk Calculator** calculates position size from defined account risk and stop distance using explicit FX/JPY/XAUUSD contract and currency-conversion assumptions.
+- Risk-calculator balances, risk percentages, prices, stop values, conversion rates, and calculated sizes are not intentionally included in analytics.
+- Node's built-in test runner covers deterministic risk calculations and timezone/DST behavior before the Astro production build.
 
 ## Analytics foundation and Phase 6F funnel reporting
 
