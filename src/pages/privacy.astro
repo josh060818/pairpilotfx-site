@@ -117,9 +117,13 @@ import SiteLayout from '../layouts/SiteLayout.astro';
     <p>
       You can revisit your analytics choice at any time using the “Analytics choices” control in the site footer.
       The PairPilot Trade Preparation Checklist stores its working state locally in the visitor's browser.
-      Instrument labels, checklist selections, and preparation notes entered into the tool are not intentionally
-      included in PairPilotFX analytics events. Tool analytics may record aggregate interaction metadata such as
-      opening the tool, completing all checklist conditions, or resetting the checklist.
+      Instrument labels, checklist selections, and preparation notes entered into the checklist are not intentionally
+      included in PairPilotFX analytics events. The Risk Calculator performs its calculations in the browser; account
+      balances, risk percentages, entry prices, stop-loss prices, manual conversion rates, monetary risk, and calculated
+      position sizes are not intentionally included in PairPilotFX analytics events. The Session Dashboard uses browser
+      timezone capabilities and named market timezones without requesting precise device location. Tool analytics may
+      record aggregate interaction metadata such as opening a tool, completing a calculation or checklist, or resetting
+      a tool.
     </p>
 
     <h2>8. Radar early-access waitlist</h2>
