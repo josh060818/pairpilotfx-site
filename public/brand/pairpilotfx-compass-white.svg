@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="PairPilotFX compass">
+  <rect width="64" height="64" rx="8" fill="#ffffff"/>
+  <circle cx="32" cy="32" r="22.5" fill="none" stroke="#07172b" stroke-width="2.8"/>
+  <path d="M32 7v7M32 50v7M7 32h7M50 32h7" fill="none" stroke="#07172b" stroke-width="2.8" stroke-linecap="square"/>
+  <path d="M26.8 37.2 29.4 29.5 43.2 20.8 33.2 32.1Z" fill="#07172b"/>
+  <path d="M33.2 32.1 43.2 20.8 35.4 35.2 26.8 37.2Z" fill="#347fd5"/>
+  <circle cx="32.3" cy="32.2" r="2.2" fill="#ffffff" stroke="#07172b" stroke-width="1.5"/>
+</svg>
