@@ -126,6 +126,13 @@ const studies = [...publishedCaseStudies].sort((left, right) =>
       </div>
     </div>
   </section>
+  <script define:vars={{ publishedCount: studies.length }}>
+    window.addEventListener('DOMContentLoaded', () => {
+      window.pairpilotfxAnalytics?.track?.('case_study_library_view', {
+        published_count: publishedCount
+      });
+    });
+  </script>
 </SiteLayout>
 
 <style>
