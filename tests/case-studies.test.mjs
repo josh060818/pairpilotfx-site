@@ -19,6 +19,7 @@ test('case study library uses reviewed static data rather than synthetic example
   assert.match(data, /publishedCaseStudies: PublicCaseStudy\[\] = \[/);
   assert.match(data, /"slug": "audcad-2026-09-28"/);
   assert.match(data, /"category": "NO_CONFIRMATION"/);
+  assert.match(data, /"slug": "audusd-2026-09-28"/);
   assert.match(data, /Do not add synthetic examples here/);
 });
 
