@@ -1,0 +1,189 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import {
+  caseStudyCategoryLabel,
+  pairLabel,
+  publishedCaseStudies,
+  type PublicCaseStudy
+} from '../../data/case-studies';
+
+export function getStaticPaths() {
+  return publishedCaseStudies.map((study) => ({
+    params: { slug: study.slug },
+    props: { study }
+  }));
+}
+
+interface Props {
+  study: PublicCaseStudy;
+}
+
+const { study } = Astro.props;
+const formatPrice = (value: number | null) =>
+  value === null ? 'Not evaluated' : String(value);
+---
+
+<SiteLayout
+  title={study.title}
+  description={study.subtitle}
+  canonicalPath={`/case-studies/${study.slug}/`}
+>
+  <section class="detail-hero">
+    <div class="container">
+      <a class="back-link" href="/case-studies/">← All case studies</a>
+      <div class="hero-meta">
+        <span>{pairLabel(study.pair)}</span>
+        <span>{study.weekStart} → {study.weekEnd}</span>
+        <span class="category">{caseStudyCategoryLabel(study.category)}</span>
+      </div>
+      <h1>{study.title}</h1>
+      <p class="lead">{study.subtitle}</p>
+      <p class="summary">{study.summary}</p>
+    </div>
+  </section>
+
+  <div class="container"><div class="rule"></div></div>
+
+  <section class="section">
+    <div class="container detail-grid">
+      <article class="content-stack">
+        <section class="case-section">
+          <p class="eyebrow">01 / Starting context</p>
+          <h2>What PairPilotFX knew at the time</h2>
+          <p>{study.startingContext}</p>
+        </section>
+
+        <section class="case-section">
+          <p class="eyebrow">02 / Selection</p>
+          <h2>Why this pair was included or filtered</h2>
+          <p>{study.selectionDecision}</p>
+        </section>
+
+        <section class="case-section">
+          <p class="eyebrow">03 / Lifecycle</p>
+          <h2>What changed during the observation window</h2>
+          <p>{study.lifecycle}</p>
+        </section>
+
+        <section class="case-section">
+          <p class="eyebrow">04 / Outcome</p>
+          <h2>What price did afterward</h2>
+          <p>{study.marketOutcome}</p>
+        </section>
+
+        <section class="case-section">
+          <p class="eyebrow">05 / Accountability</p>
+          <h2>What the process got right</h2>
+          <p>{study.whatRadarGotRight}</p>
+        </section>
+
+        <section class="case-section">
+          <p class="eyebrow">06 / Limitations</p>
+          <h2>What remained weak, incomplete, or missed</h2>
+          <p>{study.limitationsAndMisses}</p>
+          {study.limitations.length > 0 && (
+            <ul>
+              {study.limitations.map((item) => <li>{item}</li>)}
+            </ul>
+          )}
+        </section>
+
+        <section class="case-section lesson">
+          <p class="eyebrow">07 / Lesson</p>
+          <h2>{study.lesson}</h2>
+        </section>
+      </article>
+
+      <aside class="sidebar">
+        <div class="card metric-card">
+          <p class="eyebrow">Deterministic outcome</p>
+          <dl>
+            <div><dt>Direction</dt><dd>{study.metrics.direction}</dd></div>
+            <div><dt>Anchor</dt><dd>{formatPrice(study.metrics.anchorPrice)}</dd></div>
+            <div><dt>Ending</dt><dd>{formatPrice(study.metrics.endingPrice)}</dd></div>
+            <div><dt>Highest</dt><dd>{formatPrice(study.metrics.highestPrice)}</dd></div>
+            <div><dt>Lowest</dt><dd>{formatPrice(study.metrics.lowestPrice)}</dd></div>
+            <div><dt>Favourable excursion</dt><dd>{formatPrice(study.metrics.favourableExcursion)}</dd></div>
+            <div><dt>Adverse excursion</dt><dd>{formatPrice(study.metrics.adverseExcursion)}</dd></div>
+          </dl>
+          <p class="metric-note">Excursion describes scenario-relative price movement, not trade P&amp;L.</p>
+        </div>
+
+        <div class="card methodology-card">
+          <p class="eyebrow">Methodology</p>
+          <p>{study.methodologyNote}</p>
+          <a
+            href="/about/"
+            data-analytics-event="case_study_methodology_click"
+            data-analytics-placement="case_study_detail"
+          >
+            Review the PairPilotFX framework →
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container card disclaimer">
+      <strong>Risk note</strong>
+      <p>{study.disclaimer}</p>
+    </div>
+  </section>
+
+  <script define:vars={{ pair: study.pair, category: study.category, slug: study.slug }}>
+    window.addEventListener('DOMContentLoaded', () => {
+      window.pairpilotfxAnalytics?.track?.('case_study_view', {
+        pair,
+        category,
+        case_study_slug: slug
+      });
+    });
+  </script>
+</SiteLayout>
+
+<style>
+  .detail-hero { padding: 80px 0 58px; }
+  .back-link { color: #8fa8bf; text-decoration: none; font-size: .88rem; }
+  .back-link:hover { color: white; }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 28px 0 12px; color: #8fa8bf; }
+  .category {
+    border: 1px solid rgba(111,211,255,.22);
+    background: rgba(48,157,211,.08);
+    color: #b9e8ff;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: .76rem;
+    font-weight: 750;
+  }
+  .detail-hero h1 { max-width: 850px; margin: 12px 0; }
+  .detail-hero .lead { max-width: 850px; }
+  .summary { max-width: 800px; margin-top: 24px; color: #9db0c3; }
+  .detail-grid { display: grid; grid-template-columns: minmax(0,1fr) 330px; gap: 48px; align-items: start; }
+  .content-stack { display: grid; gap: 48px; }
+  .case-section { max-width: 800px; }
+  .case-section h2 { margin: 7px 0 13px; }
+  .case-section p:not(.eyebrow), .case-section li { color: #a7b9ca; line-height: 1.75; }
+  .case-section ul { padding-left: 20px; }
+  .lesson { border-left: 3px solid var(--accent-strong); padding-left: 22px; }
+  .sidebar { position: sticky; top: 96px; display: grid; gap: 16px; }
+  .metric-card, .methodology-card { padding: 22px; }
+  .metric-card dl { margin: 16px 0; }
+  .metric-card dl div { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
+  .metric-card dt { color: #8098ae; }
+  .metric-card dd { margin: 0; color: white; text-align: right; }
+  .metric-note { font-size: .76rem; color: #71879a; line-height: 1.5; }
+  .methodology-card p { color: #9db0c3; }
+  .methodology-card a { color: var(--accent-strong); text-decoration: none; font-weight: 700; }
+  .disclaimer { padding: 24px; display: grid; grid-template-columns: auto 1fr; gap: 18px; color: #7890a8; font-size: .82rem; }
+  .disclaimer strong { color: #9ab1c7; }
+  .disclaimer p { margin: 0; }
+  @media (max-width: 900px) {
+    .detail-grid { grid-template-columns: 1fr; }
+    .sidebar { position: static; }
+  }
+  @media (max-width: 600px) {
+    .detail-hero { padding-top: 64px; }
+    .disclaimer { grid-template-columns: 1fr; }
+  }
+</style>
