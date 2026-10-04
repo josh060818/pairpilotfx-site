@@ -88,6 +88,44 @@ export const publishedCaseStudies: PublicCaseStudy[] = [
       "invalidationAt": null
     },
     "publishedAt": null
+  },
+  {
+    "schemaVersion": "1.0",
+    "slug": "audusd-2026-09-28",
+    "pair": "AUDUSD",
+    "weekStart": "2026-09-28",
+    "weekEnd": "2026-10-02",
+    "category": "NO_CONFIRMATION",
+    "title": "AUDUSD: Bearish Context, No Confirmed Execution Condition",
+    "subtitle": "A retrospective of confirmation discipline through incomplete coverage and overlapping event-risk windows.",
+    "summary": "AUDUSD later recorded a meaningful bearish move, supporting the scenario context. PairPilotFX did not produce a confirmed execution condition at any point, so this is a NO_CONFIRMATION case—not a missed trade or failed signal.",
+    "startingContext": "At the 2026-09-28 decision cutoff, AUDUSD was UNMAPPED and execution was BLOCKED because major-event coverage for AUD and USD was incomplete. Historical relative strength, using the selected LEGACY source, showed STRONG_SEPARATION with USD stronger than AUD. D1 and H4 structure were bearish while H1 was bullish, leaving structure PARTIALLY_ALIGNED. Liquidity was NEAR_DECISION_AREA.",
+    "selectionDecision": "AUDUSD was included in the weekly universe. The initial decision was to withhold execution evaluation until complete major-event coverage was available; no execution condition was confirmed.",
+    "lifecycle": "The persisted record moved from UNMAPPED to EVENT_RISK, then MIXED, then POST_EVENT observation, returned to EVENT_RISK, and ended in POST_EVENT observation. Strength remained STRONG_SEPARATION. Structure was PARTIALLY_ALIGNED in most snapshots, with one TRANSITIONAL snapshot. Execution was BLOCKED or OBSERVE throughout; confirmation never occurred.",
+    "marketOutcome": "Evaluated afterward on H1 data, AUDUSD moved from 0.70189 to 0.69574. The observed low was 0.69040 and the high was 0.70394. The bearish scenario recorded meaningful movement and scenarioSupport=SUPPORTED. The starting 0.70040 support was touched, crossed, and observed to close beyond; the starting 0.70451 resistance was not touched.",
+    "whatRadarGotRight": "The persisted historical strength record consistently maintained USD-over-AUD separation, and the prevailing structure context was mostly bearish. More importantly, Radar preserved the event-risk and post-event observation constraints instead of converting directional context into a confirmed execution condition.",
+    "limitationsAndMisses": "A real limitation at the decision cutoff was incomplete major-event coverage, which made the macro state UNMAPPED. Once coverage was available, overlapping high-impact event and post-event windows continued to constrain evaluation. This was not a deterministic Radar miss: the evaluation is NO_CONFIRMATION, confirmationOccurred=false, and no invalidation was recorded.",
+    "lesson": "Confirmation discipline matters under event risk. A later scenario-supported move does not retrospectively establish that execution should have occurred when coverage was incomplete, event windows were active, and confirmation never formed.",
+    "limitations": [
+      "The decision-cutoff macro record had incomplete major-event coverage for AUD and USD.",
+      "High-impact event-risk and post-event observation windows persisted through the lifecycle.",
+      "The outcome describes scenario-relative price movement only; no trade, entry, stop, target, P&L, or R-multiple was recorded.",
+      "Later Currency Strength shadow evidence does not replace the historical LEGACY relative-strength source used by the persisted Radar record."
+    ],
+    "methodologyNote": "Starting evidence is assessed point-in-time at the original decision cutoff. Market outcome is evaluated afterward from the observed H1 window and is not treated as information available to PairPilotFX at the cutoff.",
+    "disclaimer": "This retrospective is for educational and review purposes only and is not financial advice. PairPilotFX provides decision support, not trade execution or a recommendation to buy or sell.",
+    "metrics": {
+      "direction": "BEARISH",
+      "anchorPrice": 0.70189,
+      "endingPrice": 0.69574,
+      "highestPrice": 0.70394,
+      "lowestPrice": 0.6904,
+      "favourableExcursion": 0.01149,
+      "adverseExcursion": 0.0020499999999999963,
+      "confirmationAt": null,
+      "invalidationAt": null
+    },
+    "publishedAt": null
   }
 ];
 
